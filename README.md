@@ -14,7 +14,7 @@ Open `template.pdf` for the illustrated guide; edit `template.tex` to reuse its 
 - Live overflow examples: a long chapter title, slide title/subtitle, an unbroken identifier, block headings and cover/closing fields with their separate limits.
 - Exact replacement paths, metadata, copyable slide patterns and the build sequence.
 
-For your own talk, replace the metadata near the top of `template.tex`, overwrite `assets/lab-logo.png`, replace the example sections and frames, and update `bib.bib`. Keep the theme, bundled `truncate.sty` and branding assets together. Delete the deliberately oversized demonstration chapter and extra cover. Its metadata changes are scoped to that cover frame.
+For your own talk, replace the metadata near the top of `template.tex`, overwrite `assets/lab-logo.png`, replace the example sections and frames, and update `bib.bib`. Keep the theme, bundled `truncate.sty` and the tracked branding assets together. Delete the deliberately oversized demonstration chapter and extra cover. Its metadata changes are scoped to that cover frame.
 
 The sample uses `fancyvrb` for literal source examples. The guide-only `guideframe` environment permits displaying a literal `\end{frame}` inside an example; ordinary content uses `frame`, with `[fragile]` when it contains verbatim code. Body content, diagrams and code lines still need to fit their allotted space; automatic ellipses apply to theme text placeholders.
 
@@ -40,16 +40,14 @@ lualatex template.tex
 
 Add sources to `bib.bib` and cite them with `\cite{key}`. Citation numbers link to their bibliography entries. The references frame splits into additional slides when needed; rerun Biber after changing citations or bibliography entries.
 
-The included `template.tex` is a visual sample deck. Replace its metadata and slide content with your presentation. Keep `beamerthemeDASE.sty` and `bib.bib` beside the source file. The copied assets are in `assets/`:
+The included `template.tex` is a visual sample deck. Replace its metadata and slide content with your presentation. Keep `beamerthemeDASE.sty` and `bib.bib` beside the source file. The tracked assets are limited to the files needed by the guide and theme:
 
-- `HKU_Engineering.png` — supplied Faculty of Engineering mark retained for optional use.
-- `HKU_English_logo.png` — supplied HKU English mark for optional use in custom layouts.
-- `DASE.svg` — supplied DASE vector artwork kept with the template for future vector workflows.
+- `DASE.svg` — supplied DASE vector artwork kept for future vector workflows.
 - `DASE.png` — compile-ready raster export of the supplied DASE mark, used by the theme.
 - `lab-logo.png` — transparent “YOUR LAB LOGO HERE” placeholder beneath the DASE mark on title, chapter, and thank-you pages. Replace this file with a PNG that has an alpha channel (RGBA), so the logo has no white rectangle. Remove any background in your image editor and export with transparency enabled: saving or renaming an opaque image as PNG does not remove its background. A PDF without a filled background also works directly. Export SVG artwork to transparent PNG or PDF first; SVG is not loaded directly by this theme. JPEG cannot store transparency. The theme automatically fits the image into a box with the same width and height as the DASE mark, preserving its proportions. To use another filename, add `\renewcommand{\daselablogofile}{assets/my-lab-logo.pdf}` after loading the theme.
 - `HKU_crest_bw.png` — transparent monochrome crest prepared from the supplied `2a.pdf` artwork for watermark use.
 - `HKU_crest_white.png` — transparent white crest for watermark use on dark cover pages.
-- `images/2a.ai.ps` and `images/4a.jpg` — supplied source branding references retained in the fork.
+- `images/4a.jpg` — the image used by the guide's image-and-description example.
 
 ## Design choices
 
@@ -74,3 +72,5 @@ git log --oneline --decorate -5
 The initial commit is inherited from the upstream HKU template; the DASE changes are recorded in the local fork commit on top of it.
 
 Theme-owned titles, subtitles, chapter names, author/date fields, and footer metadata are bounded automatically. Slide headings and footer fields use one line. Presentation cover titles/subtitles and thank-you titles/closing text use up to four lines. Chapter titles use up to eight lines; only text beyond the eighth line receives an ellipsis. Chapter numbers stay centred beside the complete visible title. Overflow ends with an ellipsis at the original font size. The public-domain `truncate.sty` package is bundled so no additional installation is needed. This rule covers the theme placeholders; slide body content remains authored normally.
+
+Generated LaTeX files (`.aux`, `.log`, `.nav`, `.snm`, `.toc`, bibliography intermediates, and similar output) are ignored by `.gitignore`; only source files, required assets, and the compiled guide PDF belong in the repository.

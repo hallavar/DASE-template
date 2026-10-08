@@ -1,0 +1,27 @@
+# LaTeX build output
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex
+*.synctex.gz
+*.toc
+*.vrb
+
+# Common auxiliary/build directories
+build/
+out/
+_output/
+
+# Temporary editor files
+*~
+.DS_Store
