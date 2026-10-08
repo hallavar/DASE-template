@@ -53,8 +53,8 @@
 \setbeamercolor{author in head/foot}{fg=DASEslate,bg=DASEpaper}
 \setbeamercolor{date in head/foot}{fg=DASEslate,bg=DASEpaper}
 
-\setbeamerfont{title}{family=\sffamily,series=\bfseries,size=\fontsize{22}{26}\selectfont}
-\setbeamerfont{subtitle}{family=\sffamily,size=\fontsize{12}{15}\selectfont}
+\setbeamerfont{title}{family=\sffamily,series=\bfseries,size=\fontsize{20}{24}\selectfont}
+\setbeamerfont{subtitle}{family=\sffamily,size=\fontsize{11}{14}\selectfont}
 \setbeamerfont{author}{family=\sffamily,series=\bfseries,size=\large}
 \setbeamerfont{institute}{family=\sffamily,size=\small}
 \setbeamerfont{date}{family=\sffamily,size=\small}
@@ -77,56 +77,20 @@
 \newcommand{\dasebadge}{\includegraphics[width=.24\paperwidth]{assets/DASE.png}}
 \newcommand{\dasewatermark}{\includegraphics[height=.70\paperheight]{assets/HKU_crest_bw.png}}
 \newcommand{\dasewatermarklight}{\includegraphics[height=.70\paperheight]{assets/HKU_crest_white.png}}
-\newcommand{\dasedivider}{%
-  \draw[DASEorange,line width=5.5pt,line cap=round,line join=round]
-    ([xshift=.31\paperwidth,yshift=-.21\paperheight]current page.north west) --
-    ([xshift=.35\paperwidth,yshift=-.49\paperheight]current page.north west) --
-    ([xshift=.31\paperwidth,yshift=-.73\paperheight]current page.north west);}
-\newcommand{\daseorganiccover}{%
+% One shared geometric chevron for all opening, section, and closing pages.
+% The apex sits at 42% of the page height; both ends reach the page edge.
+\newcommand{\dasepanel}[2]{%
   \path[use as bounding box] (current page.north west) rectangle (current page.south east);
-  \fill[DASEmist] (current page.north west) rectangle (current page.south east);
-  \coordinate (daseA) at ([xshift=.39\paperwidth,yshift=-.08\paperheight]current page.north west);
-  \coordinate (daseB) at ([xshift=.30\paperwidth,yshift=-.47\paperheight]current page.north west);
-  \coordinate (daseC) at ([xshift=.42\paperwidth,yshift=-.90\paperheight]current page.north west);
-  \coordinate (daseAone) at ([xshift=.35\paperwidth,yshift=-.22\paperheight]current page.north west);
-  \coordinate (daseAtwo) at ([xshift=.28\paperwidth,yshift=-.36\paperheight]current page.north west);
-  \coordinate (daseBone) at ([xshift=.30\paperwidth,yshift=-.59\paperheight]current page.north west);
-  \coordinate (daseBtwo) at ([xshift=.36\paperwidth,yshift=-.72\paperheight]current page.north west);
-  \coordinate (daseCone) at ([xshift=.44\paperwidth,yshift=-.96\paperheight]current page.north west);
-  \coordinate (daseCtwo) at ([xshift=.46\paperwidth,yshift=-.99\paperheight]current page.north west);
-  \path[fill=DASEpurple]
-    (daseA) .. controls (daseAone) and (daseAtwo) .. (daseB)
-      .. controls (daseBone) and (daseBtwo) .. (daseC)
-      .. controls (daseCone) and (daseCtwo) .. (current page.south east)
-      -- (current page.north east) -- cycle;
-  \draw[DASEorange,line width=5pt,line cap=round,line join=round]
-    (daseA) .. controls (daseAone) and (daseAtwo) .. (daseB)
-      .. controls (daseBone) and (daseBtwo) .. (daseC)
-      .. controls (daseCone) and (daseCtwo) .. (current page.south east);
-  }
-\newcommand{\daseorganicsection}{%
-  \path[use as bounding box] (current page.north west) rectangle (current page.south east);
-  \fill[DASEpaper] (current page.north west) rectangle (current page.south east);
-  % Section pages reuse the exact organic boundary from the title page.
-  \coordinate (daseA) at ([xshift=.39\paperwidth,yshift=-.08\paperheight]current page.north west);
-  \coordinate (daseB) at ([xshift=.30\paperwidth,yshift=-.47\paperheight]current page.north west);
-  \coordinate (daseC) at ([xshift=.42\paperwidth,yshift=-.90\paperheight]current page.north west);
-  \coordinate (daseAone) at ([xshift=.35\paperwidth,yshift=-.22\paperheight]current page.north west);
-  \coordinate (daseAtwo) at ([xshift=.28\paperwidth,yshift=-.36\paperheight]current page.north west);
-  \coordinate (daseBone) at ([xshift=.30\paperwidth,yshift=-.59\paperheight]current page.north west);
-  \coordinate (daseBtwo) at ([xshift=.36\paperwidth,yshift=-.72\paperheight]current page.north west);
-  \coordinate (daseCone) at ([xshift=.44\paperwidth,yshift=-.96\paperheight]current page.north west);
-  \coordinate (daseCtwo) at ([xshift=.46\paperwidth,yshift=-.99\paperheight]current page.north west);
-  \path[fill=DASEmist]
-    (current page.north west) -- (daseA)
-      .. controls (daseAone) and (daseAtwo) .. (daseB)
-      .. controls (daseBone) and (daseBtwo) .. (daseC)
-      .. controls (daseCone) and (daseCtwo) .. (current page.south east)
-      -- (current page.south west) -- cycle;
-  \draw[DASEorange,line width=5pt,line cap=round,line join=round]
-    (daseA) .. controls (daseAone) and (daseAtwo) .. (daseB)
-      .. controls (daseBone) and (daseBtwo) .. (daseC)
-      .. controls (daseCone) and (daseCtwo) .. (current page.south east);}
+  \coordinate (daseTop) at ([xshift=.30\paperwidth]current page.north west);
+  \coordinate (daseTip) at ([xshift=.375\paperwidth,yshift=-.42\paperheight]current page.north west);
+  \coordinate (daseBottom) at ([xshift=.30\paperwidth]current page.south west);
+  \fill[#1] (current page.north west) rectangle (current page.south east);
+  \fill[#2] (daseTop) -- (daseTip) -- (daseBottom)
+    -- (current page.south east) -- (current page.north east) -- cycle;
+  \draw[DASEorange,line width=5pt,line cap=butt,line join=miter]
+    (daseTop) -- (daseTip) -- (daseBottom);}
+\newcommand{\dasecover}{\dasepanel{DASEmist}{DASEpurple}}
+\newcommand{\dasesectionbackground}{\dasepanel{DASEmist}{DASEpaper}}
 
 \defbeamertemplate*{frametitle}{DASE}{%
   \nointerlineskip
@@ -155,11 +119,11 @@
 
 \defbeamertemplate*{title page}{DASE}{%
   \begin{tikzpicture}[remember picture,overlay]
-    \daseorganiccover
+    \dasecover
     \node[opacity=.10,anchor=center] at ([xshift=.76\paperwidth,yshift=-.54\paperheight]current page.north west) {\dasewatermarklight};
     \node[anchor=north west] at ([xshift=.48cm,yshift=-.48cm]current page.north west) {\dasebadge};
-    \node[anchor=west,text width=.59\paperwidth,align=left] at ([xshift=.375\paperwidth,yshift=.17\paperheight]current page.west) {\usebeamerfont{title}\color{white}\inserttitle};
-    \node[anchor=north west,text width=.57\paperwidth,align=left] at ([xshift=.375\paperwidth,yshift=-.51\paperheight]current page.north west) {\usebeamerfont{subtitle}\color{white!82}\insertsubtitle};
+    \node[anchor=west,text width=.55\paperwidth,align=left] at ([xshift=.415\paperwidth,yshift=.17\paperheight]current page.west) {\usebeamerfont{title}\color{white}\inserttitle};
+    \node[anchor=north west,text width=.54\paperwidth,align=left] at ([xshift=.415\paperwidth,yshift=-.51\paperheight]current page.north west) {\usebeamerfont{subtitle}\color{white!82}\insertsubtitle};
     \node[anchor=south west] at ([xshift=.47\paperwidth,yshift=.9cm]current page.south west) {\usebeamerfont{author}\color{white}\insertauthor};
     \node[anchor=south east] at ([xshift=-.78cm,yshift=.9cm]current page.south east) {\usebeamerfont{date}\color{white!82}\insertdate};
   \end{tikzpicture}%
@@ -168,12 +132,12 @@
 
 \defbeamertemplate*{section page}{DASE}{%
   \begin{tikzpicture}[remember picture,overlay]
-    \daseorganicsection
+    \dasesectionbackground
     \node[opacity=.09,anchor=center] at ([xshift=.76\paperwidth,yshift=-.54\paperheight]current page.north west) {\dasewatermark};
     \node[anchor=north west] at ([xshift=.48cm,yshift=-.48cm]current page.north west) {\dasebadge};
-    \node[anchor=west,text=DASEpurple,font=\sffamily\bfseries\fontsize{28}{32}\selectfont] at ([xshift=.36\paperwidth]current page.west) {\insertsectionnumber};
-    \node[anchor=west,text=HKUink,text width=.55\paperwidth,align=left,font=\sffamily\bfseries\fontsize{24}{29}\selectfont] at ([xshift=.43\paperwidth,yshift=.02\paperheight]current page.west) {\insertsectionhead};
-    \node[anchor=south west,text=DASEslate,font=\sffamily\fontsize{8}{10}\selectfont] at ([xshift=.36\paperwidth,yshift=.9cm]current page.south west) {DASE / HKU SCHOOL OF ENGINEERING};
+    \node[anchor=west,text=DASEpurple,font=\sffamily\bfseries\fontsize{28}{32}\selectfont] at ([xshift=.415\paperwidth]current page.west) {\insertsectionnumber};
+    \node[anchor=west,text=HKUink,text width=.49\paperwidth,align=left,font=\sffamily\bfseries\fontsize{24}{29}\selectfont] at ([xshift=.48\paperwidth,yshift=.02\paperheight]current page.west) {\insertsectionhead};
+    \node[anchor=south west,text=DASEslate,font=\sffamily\fontsize{8}{10}\selectfont] at ([xshift=.415\paperwidth,yshift=.9cm]current page.south west) {DASE / HKU SCHOOL OF ENGINEERING};
   \end{tikzpicture}%
   \strut
 }
