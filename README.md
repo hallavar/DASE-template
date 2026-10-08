@@ -32,6 +32,7 @@ The included `template.tex` is a visual sample deck. Replace its metadata and sl
 - `HKU_English_logo.png` — supplied HKU English mark for optional use in custom layouts.
 - `DASE.svg` — supplied DASE vector artwork kept with the template for future vector workflows.
 - `DASE.png` — compile-ready raster export of the supplied DASE mark, used by the theme.
+- `lab-logo.png` — transparent “YOUR LAB LOGO HERE” placeholder beneath the DASE mark on title, chapter, and thank-you pages. Replace this file with your lab/team logo; the theme automatically fits it into a box with the same width and height as the DASE mark, preserving its proportions. A transparent PNG avoids a visible background. To use another filename or a PDF/JPG instead, add `\renewcommand{\daselablogofile}{assets/my-lab-logo.pdf}` after loading the theme.
 - `HKU_crest_bw.png` — transparent monochrome crest prepared from the supplied `2a.pdf` artwork for watermark use.
 - `HKU_crest_white.png` — transparent white crest for watermark use on dark cover pages.
 - `images/2a.ai.ps` and `images/4a.jpg` — supplied source branding references retained in the fork.
