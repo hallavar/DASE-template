@@ -77,6 +77,11 @@
 \newcommand{\dasebadge}{\includegraphics[width=.24\paperwidth]{assets/DASE.png}}
 \newcommand{\dasewatermark}{\includegraphics[height=.70\paperheight]{assets/HKU_crest_bw.png}}
 \newcommand{\dasewatermarklight}{\includegraphics[height=.70\paperheight]{assets/HKU_crest_white.png}}
+\newcommand{\dasedivider}{%
+  \draw[DASEorange,line width=5.5pt,line cap=round,line join=round]
+    ([xshift=.31\paperwidth,yshift=-.21\paperheight]current page.north west) --
+    ([xshift=.35\paperwidth,yshift=-.49\paperheight]current page.north west) --
+    ([xshift=.31\paperwidth,yshift=-.73\paperheight]current page.north west);}
 
 \defbeamertemplate*{frametitle}{DASE}{%
   \nointerlineskip
@@ -107,7 +112,7 @@
   \begin{tikzpicture}[remember picture,overlay]
     \fill[DASEpurple] (current page.north west) rectangle (current page.south east);
     \fill[DASEmist] (current page.north west) rectangle ([xshift=.31\paperwidth]current page.south west);
-    \fill[DASEorange] ([xshift=.31\paperwidth]current page.north west) rectangle ([xshift=.32\paperwidth]current page.south west);
+    \dasedivider
     \node[opacity=.10,anchor=center] at ([xshift=.76\paperwidth,yshift=-.54\paperheight]current page.north west) {\dasewatermarklight};
     \node[anchor=north west] at ([xshift=.48cm,yshift=-.48cm]current page.north west) {\dasebadge};
     \node[anchor=west,text width=.59\paperwidth,align=left] at ([xshift=.375\paperwidth,yshift=.17\paperheight]current page.west) {\usebeamerfont{title}\color{white}\inserttitle};
@@ -122,12 +127,12 @@
   \begin{tikzpicture}[remember picture,overlay]
     \fill[DASEpaper] (current page.north west) rectangle (current page.south east);
     \fill[DASEmist] (current page.north west) rectangle ([xshift=.31\paperwidth]current page.south west);
-    \fill[DASEorange] ([xshift=.31\paperwidth]current page.north west) rectangle ([xshift=.32\paperwidth]current page.south west);
+    \dasedivider
     \node[opacity=.09,anchor=center] at ([xshift=.76\paperwidth,yshift=-.54\paperheight]current page.north west) {\dasewatermark};
     \node[anchor=north west] at ([xshift=.48cm,yshift=-.48cm]current page.north west) {\dasebadge};
-    \node[anchor=west,text=DASEpurple,font=\sffamily\bfseries\fontsize{28}{32}\selectfont] at ([xshift=.33\paperwidth]current page.west) {\insertsectionnumber};
-    \node[anchor=west,text=HKUink,text width=.55\paperwidth,align=left,font=\sffamily\bfseries\fontsize{24}{29}\selectfont] at ([xshift=.40\paperwidth,yshift=.02\paperheight]current page.west) {\insertsectionhead};
-    \node[anchor=south west,text=DASEslate,font=\sffamily\fontsize{8}{10}\selectfont] at ([xshift=.33\paperwidth,yshift=.9cm]current page.south west) {DASE / HKU SCHOOL OF ENGINEERING};
+    \node[anchor=west,text=DASEpurple,font=\sffamily\bfseries\fontsize{28}{32}\selectfont] at ([xshift=.36\paperwidth]current page.west) {\insertsectionnumber};
+    \node[anchor=west,text=HKUink,text width=.55\paperwidth,align=left,font=\sffamily\bfseries\fontsize{24}{29}\selectfont] at ([xshift=.43\paperwidth,yshift=.02\paperheight]current page.west) {\insertsectionhead};
+    \node[anchor=south west,text=DASEslate,font=\sffamily\fontsize{8}{10}\selectfont] at ([xshift=.36\paperwidth,yshift=.9cm]current page.south west) {DASE / HKU SCHOOL OF ENGINEERING};
   \end{tikzpicture}%
   \strut
 }
