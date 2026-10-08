@@ -40,4 +40,4 @@ git remote -v
 git log --oneline --decorate -5
 ```
 
-The initial commit is inherited from the upstream HKU template; the DASE changes are the working-tree changes in this local fork.
+The initial commit is inherited from the upstream HKU template; the DASE changes are recorded in the local fork commit on top of it.
