@@ -115,16 +115,96 @@
   \begin{beamercolorbox}[wd=\textwidth,ht=0.055cm,dp=0pt]{structure}\end{beamercolorbox}\par
 }
 
+% Record content frames in the auxiliary file: plain pages and unnumbered
+% frames are omitted, and multiple overlays share one dot.  A separate
+% chapter identifier also distinguishes starred sections such as References.
+\newcount\dase@chapter
+\newcount\dase@lastframe
+\newcount\dase@total
+\newcount\dase@current
+\newcount\dase@chaptercurrent
+\newsavebox{\dase@dotsbox}
+\def\dase@entries{}
+\AddToHook{cmd/section/before}{\global\advance\dase@chapter by 1\relax}
+\newcommand{\daseprogressentry}[3]{%
+  \global\advance\dase@total by 1\relax
+  \g@addto@macro\dase@entries{\dase@entry{#1}{#2}{#3}}%
+  \ifcsname dase@chaptertotal@#1\endcsname\else
+    \expandafter\gdef\csname dase@chaptertotal@#1\endcsname{0}%
+  \fi
+  \expandafter\xdef\csname dase@chaptertotal@#1\endcsname{%
+    \the\numexpr\csname dase@chaptertotal@#1\endcsname+1\relax}}
+\AtBeginEnvironment{beamer@frameslide}{%
+  \ifbeamer@plainframe\else
+    \ifbeamer@noframenumbering\else
+      \ifnum\c@framenumber>\dase@lastframe
+        \global\dase@lastframe=\c@framenumber
+        \immediate\write\@auxout{%
+          \string\daseprogressentry{\the\dase@chapter}{\the\c@framenumber}{\the\c@page}}%
+      \fi
+    \fi
+  \fi}
+\newcommand{\dase@progresscounts}{%
+  \dase@current=0\relax
+  \dase@chaptercurrent=0\relax
+  \def\dase@entry##1##2##3{%
+    \ifnum##2>\c@framenumber\else
+      \advance\dase@current by 1\relax
+      \ifnum##1=\dase@chapter
+        \advance\dase@chaptercurrent by 1\relax
+      \fi
+    \fi}%
+  \dase@entries}
+\newcommand{\dase@progressdots}{%
+  \begingroup
+  \def\dase@previouschapter{-1}%
+  \def\dase@entry##1##2##3{%
+    \ifnum\dase@previouschapter<0\else
+      \ifnum##1=\dase@previouschapter\else\hspace{.20cm}\fi
+    \fi
+    \def\dase@previouschapter{##1}%
+    \def\dase@dotfill{DASEpaper}%
+    \def\dase@dotedge{DASEline}%
+    \def\dase@dotradius{1.3pt}%
+    \ifnum##1=\dase@chapter\def\dase@dotedge{DASEpurple!55}\fi
+    \ifnum##2<\c@framenumber
+      \def\dase@dotfill{DASEpurple!55}%
+      \def\dase@dotedge{DASEpurple!55}%
+    \fi
+    \ifnum##2=\c@framenumber
+      \def\dase@dotfill{DASEorange}%
+      \def\dase@dotedge{DASEorange}%
+      \def\dase@dotradius{1.8pt}%
+    \fi
+    \hyperlink{Navigation##3}{%
+      \tikz[baseline=-.5ex]{%
+        \path[use as bounding box] (-.11cm,-2.1pt) rectangle (.11cm,2.1pt);
+        \draw[fill=\dase@dotfill,draw=\dase@dotedge,line width=.4pt]
+          (0,0) circle (\dase@dotradius);}}}%
+  \sbox{\dase@dotsbox}{\dase@entries}%
+  \ifdim\wd\dase@dotsbox>.85\paperwidth
+    \resizebox{.85\paperwidth}{!}{\usebox{\dase@dotsbox}}%
+  \else\usebox{\dase@dotsbox}\fi
+  \endgroup}
+
 \defbeamertemplate*{footline}{DASE}{%
   \leavevmode
-  \begin{beamercolorbox}[wd=\textwidth,ht=0.12cm,dp=0pt]{structure}\end{beamercolorbox}\par
+  \dase@progresscounts
+  \begin{beamercolorbox}[wd=\paperwidth,ht=.18cm,dp=.05cm,center]{author in head/foot}%
+    \dase@progressdots
+  \end{beamercolorbox}\par\nointerlineskip
   \hbox{%
-    \begin{beamercolorbox}[wd=.70\paperwidth,ht=3.3ex,dp=1.25ex,leftskip=.78cm]{author in head/foot}%
+    \begin{beamercolorbox}[wd=.52\paperwidth,ht=3.3ex,dp=1.25ex,leftskip=.78cm]{author in head/foot}%
       \usebeamerfont{footline}\insertshortauthor
       \ifx\insertshortinstitute\@empty\else\hspace{0.55em}{\color{DASEline}\textbar}\hspace{0.55em}\insertshortinstitute\fi
     \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=.30\paperwidth,ht=3.3ex,dp=1.25ex,rightskip=.78cm plus 1fil]{date in head/foot}%
-      \usebeamerfont{footline}\hfill\insertsectionhead\hspace{0.8em}{\color{DASEline}\textbar}\hspace{0.8em}\insertframenumber\,/\,\inserttotalframenumber
+    \begin{beamercolorbox}[wd=.48\paperwidth,ht=3.3ex,dp=1.25ex,rightskip=.78cm plus 1fil]{date in head/foot}%
+      \usebeamerfont{footline}\hfill\insertsectionhead
+      \ifcsname dase@chaptertotal@\the\dase@chapter\endcsname
+        \hspace{.6em}\the\dase@chaptercurrent\,/\,\csname dase@chaptertotal@\the\dase@chapter\endcsname
+      \fi
+      \hspace{.8em}{\color{DASEline}\textbar}\hspace{.8em}%
+      \the\dase@current\,/\,\the\dase@total
     \end{beamercolorbox}%
   }
 }
