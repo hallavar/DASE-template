@@ -287,7 +287,7 @@ def normalise(values):
     \midrule
     Slide title / subtitle & One line, then an ellipsis.\\[2mm]
     Cover title / subtitle & At most two lines, then an ellipsis.\\[2mm]
-    Chapter title & At most two lines; number stays vertically centred.\\[2mm]
+    Chapter title & Up to eight full lines; ellipsis only if more follow. The number stays vertically centred.\\[2mm]
     Block heading / footer fields & One line, then an ellipsis.\\
     \bottomrule
   \end{tabular}
@@ -342,7 +342,7 @@ def normalise(values):
       \end{block}
     \column{.48\textwidth}
       \begin{exampleblock}{The chapter page just shown}
-        The chapter name also used its two-line limit. Its number was centred against the complete visible title, rather than only its first line.
+        The chapter name appeared in full across multiple lines. Up to eight lines are allowed before truncation. Its number stays centred against the complete visible title.
       \end{exampleblock}
   \end{columns}
   \medskip

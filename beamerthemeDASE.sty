@@ -171,6 +171,8 @@
   \endgroup}
 % Keep at most the requested number of lines, marking the final visible line
 % when more text follows.  Normal manual line breaks remain available.
+\newcommand{\dase@boundedline}{%
+  \daseellipsis{\hsize}{\unhcopy\dase@linebox\unskip\unskip}}
 \newcommand{\daseboundedtext}[3][2]{%
   \begingroup
   \hsize=#2\relax\linewidth=\hsize
@@ -190,16 +192,24 @@
       \hbox to\hsize{%
         \ifnum\dase@linesleft=1
           \ifvoid\dase@textblock
-            \daseellipsis{\hsize}{\unhcopy\dase@linebox\unskip\unskip}%
+            \dase@boundedline
           \else
             \dase@forceellipsis{\hsize}{\unhcopy\dase@linebox\unskip\unskip}%
           \fi
         \else
-          \daseellipsis{\hsize}{\unhcopy\dase@linebox\unskip\unskip}%
+          \dase@boundedline
         \fi\hfil}%
       \advance\dase@linesleft by -1\relax
       \ifvoid\dase@textblock\dase@linesleft=0\relax\fi
     \ifnum\dase@linesleft>0\repeat}%
+  \endgroup}
+% Retain TeX's fitted interword spacing on chapter lines.  Reboxing a line
+% at its natural width can otherwise remove words that already fit after
+% TeX shrinks the spaces.  Only the eighth line may acquire an ellipsis.
+\newcommand{\dasechaptertext}[2]{%
+  \begingroup
+  \renewcommand{\dase@boundedline}{\box\dase@linebox}%
+  \daseboundedtext[8]{#1}{#2}%
   \endgroup}
 
 \defbeamertemplate*{frametitle}{DASE}{%
@@ -329,10 +339,11 @@
     \dasesectionbackground
     \node[opacity=.09,anchor=center] at ([xshift=.76\paperwidth,yshift=-.54\paperheight]current page.north west) {\dasewatermark};
     \dasebranding
-    \node[anchor=west,text=HKUink,font=\sffamily\bfseries\fontsize{24}{29}\selectfont] (dasesectiontitle) at ([xshift=.48\paperwidth,yshift=.02\paperheight]current page.west) {\daseboundedtext[2]{.49\paperwidth}{\secname}};
-    % Follow the title's vertical centre, including when it wraps to two lines.
+    \node[anchor=west,text=HKUink,font=\sffamily\bfseries\fontsize{24}{29}\selectfont] (dasesectiontitle) at ([xshift=.48\paperwidth,yshift=.02\paperheight]current page.west) {\dasechaptertext{.49\paperwidth}{\secname}};
+    % Follow the title's vertical centre for any visible line count, up to eight.
     \node[anchor=west,text=DASEpurple,font=\sffamily\bfseries\fontsize{28}{32}\selectfont] at ([xshift=-.065\paperwidth]dasesectiontitle.west) {\insertsectionnumber};
-    \node[anchor=south west,text=DASEslate,font=\sffamily\fontsize{8}{10}\selectfont] at ([xshift=.415\paperwidth,yshift=.9cm]current page.south west) {DASE / HKU SCHOOL OF ENGINEERING};
+    % Leave room above the caption for an eight-line title at the original size.
+    \node[anchor=south west,text=DASEslate,font=\sffamily\fontsize{8}{10}\selectfont] at ([xshift=.415\paperwidth,yshift=.30cm]current page.south west) {DASE / HKU SCHOOL OF ENGINEERING};
   \end{tikzpicture}%
   \strut
 }
