@@ -319,8 +319,9 @@
     \dasecover
     \node[opacity=.10,anchor=center] at ([xshift=.76\paperwidth,yshift=-.54\paperheight]current page.north west) {\dasewatermarklight};
     \dasebranding
-    \node[anchor=west,text width=.55\paperwidth,align=left] at ([xshift=.415\paperwidth,yshift=.17\paperheight]current page.west) {\usebeamerfont{title}\color{white}\daseboundedtext[2]{.55\paperwidth}{\inserttitle}};
-    \node[anchor=north west,text width=.54\paperwidth,align=left] at ([xshift=.415\paperwidth,yshift=-.51\paperheight]current page.north west) {\usebeamerfont{subtitle}\color{white!82}\daseboundedtext[2]{.54\paperwidth}{\insertsubtitle}};
+    % Cover fields allow four lines while keeping the author and date clear.
+    \node[anchor=west,text width=.55\paperwidth,align=left] at ([xshift=.415\paperwidth,yshift=.17\paperheight]current page.west) {\usebeamerfont{title}\color{white}\daseboundedtext[4]{.55\paperwidth}{\inserttitle}};
+    \node[anchor=north west,text width=.54\paperwidth,align=left] at ([xshift=.415\paperwidth,yshift=-.51\paperheight]current page.north west) {\usebeamerfont{subtitle}\color{white!82}\daseboundedtext[4]{.54\paperwidth}{\insertsubtitle}};
     \node[anchor=south west] at ([xshift=.47\paperwidth,yshift=.9cm]current page.south west) {\usebeamerfont{author}\color{white}\daseellipsis{.25\paperwidth}{\insertauthor}};
     \node[anchor=south east] at ([xshift=-.78cm,yshift=.9cm]current page.south east) {\usebeamerfont{date}\color{white!82}\daseellipsis{.20\paperwidth}{\insertdate}};
   \end{tikzpicture}%
@@ -332,8 +333,10 @@
     \dasecover
     \node[opacity=.10,anchor=center] at ([xshift=.76\paperwidth,yshift=-.54\paperheight]current page.north west) {\dasewatermarklight};
     \dasebranding
-    \node[anchor=west,text=white,text width=.55\paperwidth,align=left,font=\sffamily\bfseries\fontsize{30}{34}\selectfont] at ([xshift=.415\paperwidth,yshift=.13\paperheight]current page.west) {\daseboundedtext[2]{.55\paperwidth}{#1}};
-    \node[anchor=north west,align=left,text=white!82,text width=.5\paperwidth,font=\sffamily\large] at ([xshift=.415\paperwidth,yshift=-.53\paperheight]current page.north west) {\daseboundedtext[2]{.5\paperwidth}{#2}};
+    % Closing fields are shorter by design: four lines leave breathing room for
+    % the watermark and the final message.
+    \node[anchor=west,text=white,text width=.55\paperwidth,align=left,font=\sffamily\bfseries\fontsize{30}{34}\selectfont] at ([xshift=.415\paperwidth,yshift=.20\paperheight]current page.west) {\daseboundedtext[4]{.55\paperwidth}{#1}};
+    \node[anchor=north west,align=left,text=white!82,text width=.5\paperwidth,font=\sffamily\large] at ([xshift=.415\paperwidth,yshift=-.63\paperheight]current page.north west) {\daseboundedtext[4]{.5\paperwidth}{#2}};
   \end{tikzpicture}\strut}
 
 \defbeamertemplate*{section page}{DASE}{%

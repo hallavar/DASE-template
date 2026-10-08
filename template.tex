@@ -220,7 +220,7 @@ def normalise(values):
     """Scale a sequence to the range [0, 1]."""
     low, high = min(values), max(values)
     if high == low:
-        return [0.0 for _ in values]
+        return [1.0 for _ in values]
     return [(x - low) / (high - low)
             for x in values]
 \end{Verbatim}
@@ -286,7 +286,8 @@ def normalise(values):
     \textbf{Theme placeholder} & \textbf{Automatic behaviour}\\
     \midrule
     Slide title / subtitle & One line, then an ellipsis.\\[2mm]
-    Cover title / subtitle & At most two lines, then an ellipsis.\\[2mm]
+    Presentation cover title / subtitle & Up to four lines; ellipsis only if more follow.\\[2mm]
+    Thank-you title / closing text & Up to four lines; ellipsis only if more follow.\\[2mm]
     Chapter title & Up to eight full lines; ellipsis only if more follow. The number stays vertically centred.\\[2mm]
     Block heading / footer fields & One line, then an ellipsis.\\
     \bottomrule
@@ -333,12 +334,12 @@ def normalise(values):
   \end{columns}
 \end{frame}
 
-\begin{frame}{Two-line cover fields stay within their bounds}
+\begin{frame}{Cover and closing fields keep their own limits}
   \framesubtitle{The following page is a live cover demo, not a second presentation}
   \begin{columns}[T,onlytextwidth]
     \column{.48\textwidth}
       \begin{block}{What you will see}
-        A title and subtitle that need more than two lines. Each stops after its second line and ends with an ellipsis. Author and date remain in their own areas.
+        Presentation titles and subtitles can use up to four lines before an ellipsis. Author and date remain in their own areas.
       \end{block}
     \column{.48\textwidth}
       \begin{exampleblock}{The chapter page just shown}
@@ -348,14 +349,14 @@ def normalise(values):
   \medskip
   \small This demo uses the same \texttt{\textbackslash titlepage} as the opening. The metadata changes are local to that frame; your normal presentation metadata returns afterwards.
   \par\medskip
-  \textcolor{DASEslate}{\small The closing command \texttt{\textbackslash dasethankyou[Title]\{Subtitle\}} uses the same two-line limits.}
+  \textcolor{DASEslate}{\small The closing command \texttt{\textbackslash dasethankyou[Title]\{Subtitle\}} uses a four-line limit for each field.}
 \end{frame}
 
 % A scoped title-page stress example. Delete this frame for a real talk.
 \begin{frame}[plain]
   \begingroup
   \title{Practical IP based traffic generation for large distributed systems with complex conditional behaviour and long term temporal dependencies}
-  \subtitle{Overflow demo: this subtitle contains far more explanation than the cover's two-line placeholder can display, so its visible ending is replaced automatically by an ellipsis}
+  \subtitle{Overflow demo: this subtitle contains far more explanation than the cover's four-line placeholder can display, so its visible ending is replaced automatically by an ellipsis}
   \titlepage
   \endgroup
 \end{frame}

@@ -11,7 +11,7 @@ Open `template.pdf` for the illustrated guide; edit `template.tex` to reuse its 
 - Theme colours, title/chapter/closing pages, lab branding and clickable chapter progress.
 - Standard, example and alert blocks; nested lists; a TikZ diagram; the supplied `images/4a.jpg` with a description; literal code; tables and mathematics.
 - Numeric citations, a references page and clickable DOI links.
-- Live overflow examples: a long chapter title, slide title/subtitle, an unbroken identifier, block headings and a two-line cover title/subtitle.
+- Live overflow examples: a long chapter title, slide title/subtitle, an unbroken identifier, block headings and cover/closing fields with their separate limits.
 - Exact replacement paths, metadata, copyable slide patterns and the build sequence.
 
 For your own talk, replace the metadata near the top of `template.tex`, overwrite `assets/lab-logo.png`, replace the example sections and frames, and update `bib.bib`. Keep the theme, bundled `truncate.sty` and branding assets together. Delete the deliberately oversized demonstration chapter and extra cover. Its metadata changes are scoped to that cover frame.
@@ -73,4 +73,4 @@ git log --oneline --decorate -5
 
 The initial commit is inherited from the upstream HKU template; the DASE changes are recorded in the local fork commit on top of it.
 
-Theme-owned titles, subtitles, chapter names, author/date fields, and footer metadata are bounded automatically. Slide headings and footer fields use one line; cover titles/subtitles use at most two. Chapter pages show the full chapter title across up to eight lines, with the number centred beside the entire visible title. Only titles requiring more than eight lines receive an ellipsis on the eighth line. Overflow ends with an ellipsis at the original font size. The public-domain `truncate.sty` package is bundled so no additional installation is needed. This rule covers the theme placeholders; slide body content remains authored normally.
+Theme-owned titles, subtitles, chapter names, author/date fields, and footer metadata are bounded automatically. Slide headings and footer fields use one line. Presentation cover titles/subtitles and thank-you titles/closing text use up to four lines. Chapter titles use up to eight lines; only text beyond the eighth line receives an ellipsis. Chapter numbers stay centred beside the complete visible title. Overflow ends with an ellipsis at the original font size. The public-domain `truncate.sty` package is bundled so no additional installation is needed. This rule covers the theme placeholders; slide body content remains authored normally.
