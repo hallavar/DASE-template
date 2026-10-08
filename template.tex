@@ -12,9 +12,9 @@
 \graphicspath{{assets/}}
 
 \title[DASE Beamer]{Designing reliable systems\\for real-world data}
-\subtitle{A modern, readable Beamer template for DASE\texorpdfstring{\,·\,}{ }HKU School of Engineering}
+\subtitle{A modern, readable Beamer template for DASE}
 \author[Your Name]{Your Name}
-\institute[DASE]{Department of Data Science and Engineering\\The University of Hong Kong}
+\institute[HKU Engineering]{HKU School of Engineering}
 \date{October 2026}
 
 \AtBeginSection[]{
@@ -197,13 +197,12 @@
 
 \begin{frame}[plain]
   \begin{tikzpicture}[remember picture,overlay]
-    \fill[DASEpurple] (current page.north west) rectangle (current page.south east);
-    \fill[DASEorange] ([xshift=.305\paperwidth]current page.north west) rectangle ([xshift=.315\paperwidth]current page.south west);
-    \fill[DASEyellow] ([xshift=.88\paperwidth,yshift=-.22\paperheight]current page.north west) circle (0.6cm);
-    \node[anchor=north west,fill=white,rounded corners=1.5pt,inner sep=2.5pt] at ([xshift=.72cm,yshift=-.72cm]current page.north west) {\dasebadge};
-    \node[anchor=west,text=white,font=\sffamily\bfseries\fontsize{30}{34}\selectfont] at ([xshift=.375\paperwidth,yshift=.13\paperheight]current page.west) {Thank you};
-    \node[anchor=north west,text=white!75,text width=.5\paperwidth,font=\sffamily\large] at ([xshift=.375\paperwidth,yshift=-.53\paperheight]current page.north west) {Questions, discussion, and the next experiment.};
-    \node[anchor=south east] at ([xshift=-.8cm,yshift=.8cm]current page.south east) {\includegraphics[width=.25\paperwidth]{assets/HKU_Engineering.png}};
+    \fill[DASEpaper] (current page.north west) rectangle (current page.south east);
+    \fill[DASEpurple] (current page.north west) rectangle ([xshift=.235\paperwidth]current page.south west);
+    \fill[DASEorange] ([xshift=.235\paperwidth]current page.north west) rectangle ([xshift=.245\paperwidth]current page.south west);
+    \node[opacity=.10,anchor=center] at ([xshift=.69\paperwidth,yshift=-.54\paperheight]current page.north west) {\includegraphics[width=.84\paperwidth]{assets/DASE.png}};
+    \node[anchor=west,text=DASEpurple,font=\sffamily\bfseries\fontsize{30}{34}\selectfont] at ([xshift=.375\paperwidth,yshift=.13\paperheight]current page.west) {Thank you};
+    \node[anchor=north west,text=DASEslate,text width=.5\paperwidth,font=\sffamily\large] at ([xshift=.375\paperwidth,yshift=-.53\paperheight]current page.north west) {Questions, discussion, and the next experiment.};
   \end{tikzpicture}
   \strut
 \end{frame}

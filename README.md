@@ -31,6 +31,7 @@ The included `template.tex` is a visual sample deck. Replace its metadata and sl
 - A warm off-white canvas and dark ink keep body text readable on projectors and video calls.
 - DASE purple carries structure; the HKU crest colours are accents for diagrams, blocks, and emphasis.
 - Section pages, title pages, footers, blocks, lists, tables, and simple diagram cards are defined in the theme file.
+- The official DASE mark appears as a large, low-contrast watermark on title, section, and closing pages.
 
 If you need a different department name or a dark title, edit the metadata in `template.tex` and the colour definitions near the top of `beamerthemeDASE.sty`.
 
