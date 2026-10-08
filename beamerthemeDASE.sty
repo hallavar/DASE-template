@@ -177,8 +177,8 @@
         \else
           \daseellipsis{\hsize}{\unhcopy\dase@linebox\unskip\unskip}%
         \fi\hfil}%
-      \advance\dase@linesleft by -1
-      \ifvoid\dase@textblock\dase@linesleft=0\fi
+      \advance\dase@linesleft by -1\relax
+      \ifvoid\dase@textblock\dase@linesleft=0\relax\fi
     \ifnum\dase@linesleft>0\repeat}%
   \endgroup}
 
@@ -309,8 +309,9 @@
     \dasesectionbackground
     \node[opacity=.09,anchor=center] at ([xshift=.76\paperwidth,yshift=-.54\paperheight]current page.north west) {\dasewatermark};
     \node[anchor=north west] at ([xshift=.48cm,yshift=-.48cm]current page.north west) {\dasebadge};
-    \node[anchor=west,text=DASEpurple,font=\sffamily\bfseries\fontsize{28}{32}\selectfont] at ([xshift=.415\paperwidth]current page.west) {\insertsectionnumber};
-    \node[anchor=west,text=HKUink,text width=.49\paperwidth,align=left,font=\sffamily\bfseries\fontsize{24}{29}\selectfont] at ([xshift=.48\paperwidth,yshift=.02\paperheight]current page.west) {\daseboundedtext[2]{.49\paperwidth}{\secname}};
+    \node[anchor=west,text=HKUink,font=\sffamily\bfseries\fontsize{24}{29}\selectfont] (dasesectiontitle) at ([xshift=.48\paperwidth,yshift=.02\paperheight]current page.west) {\daseboundedtext[2]{.49\paperwidth}{\secname}};
+    % Follow the title's vertical centre, including when it wraps to two lines.
+    \node[anchor=west,text=DASEpurple,font=\sffamily\bfseries\fontsize{28}{32}\selectfont] at ([xshift=-.065\paperwidth]dasesectiontitle.west) {\insertsectionnumber};
     \node[anchor=south west,text=DASEslate,font=\sffamily\fontsize{8}{10}\selectfont] at ([xshift=.415\paperwidth,yshift=.9cm]current page.south west) {DASE / HKU SCHOOL OF ENGINEERING};
   \end{tikzpicture}%
   \strut
