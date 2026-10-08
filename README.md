@@ -1,8 +1,22 @@
 # DASE Beamer template
 
-A local DASE fork of [VincentXWD/hku_beamer_template](https://github.com/VincentXWD/hku_beamer_template) for the Department of Data Science and Engineering, HKU School of Engineering. The original repository is kept as the `upstream` Git remote so future improvements can be compared or merged deliberately.
+A local DASE fork of [VincentXWD/hku_beamer_template](https://github.com/VincentXWD/hku_beamer_template) for the Department of Data and Systems Engineering, HKU School of Engineering. The original repository is kept as the `upstream` Git remote so future improvements can be compared or merged deliberately.
 
 The DASE fork keeps the upstream repository's modular example files and assets, while `template.tex` is the new canonical entry point. It uses the supplied HKU Engineering and DASE marks, a restrained DASE purple accent, and supporting colours sampled from the HKU crest.
+
+## Use the example deck
+
+Open `template.pdf` for the illustrated guide; edit `template.tex` to reuse its examples. The deck covers:
+
+- Theme colours, title/chapter/closing pages, lab branding and clickable chapter progress.
+- Standard, example and alert blocks; nested lists; a TikZ diagram; the supplied `images/4a.jpg` with a description; literal code; tables and mathematics.
+- Numeric citations, a references page and clickable DOI links.
+- Live overflow examples: a long chapter title, slide title/subtitle, an unbroken identifier, block headings and a two-line cover title/subtitle.
+- Exact replacement paths, metadata, copyable slide patterns and the build sequence.
+
+For your own talk, replace the metadata near the top of `template.tex`, overwrite `assets/lab-logo.png`, replace the example sections and frames, and update `bib.bib`. Keep the theme, bundled `truncate.sty` and branding assets together. Delete the deliberately oversized demonstration chapter and extra cover. Its metadata changes are scoped to that cover frame.
+
+The sample uses `fancyvrb` for literal source examples. The guide-only `guideframe` environment permits displaying a literal `\end{frame}` inside an example; ordinary content uses `frame`, with `[fragile]` when it contains verbatim code. Body content, diagrams and code lines still need to fit their allotted space; automatic ellipses apply to theme text placeholders.
 
 ## Compile
 
@@ -28,7 +42,7 @@ Add sources to `bib.bib` and cite them with `\cite{key}`. Citation numbers link 
 
 The included `template.tex` is a visual sample deck. Replace its metadata and slide content with your presentation. Keep `beamerthemeDASE.sty` and `bib.bib` beside the source file. The copied assets are in `assets/`:
 
-- `HKU_Engineering.png` — supplied Faculty of Engineering mark used on the title and closing slides.
+- `HKU_Engineering.png` — supplied Faculty of Engineering mark retained for optional use.
 - `HKU_English_logo.png` — supplied HKU English mark for optional use in custom layouts.
 - `DASE.svg` — supplied DASE vector artwork kept with the template for future vector workflows.
 - `DASE.png` — compile-ready raster export of the supplied DASE mark, used by the theme.

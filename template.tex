@@ -1,14 +1,19 @@
 \documentclass[aspectratio=169,10pt]{beamer}
 
+% START HERE: edit the metadata below, replace assets/lab-logo.png, and then
+% replace the example frames with your own content. The theme sets the layout.
 % Compile: pdflatex template, biber template, then pdflatex template twice.
 % LuaLaTeX can replace pdfLaTeX in the same sequence.
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+\fi
 \usepackage{lmodern}
 \usepackage{amsmath}
 \usepackage{array}
 \usepackage{booktabs}
 \usepackage{tikz}
+\usepackage{fancyvrb}
 \usepackage{beamerthemeDASE}
 % Replace assets/lab-logo.png with your lab/team logo; sizing is automatic.
 % For another filename/format: \renewcommand{\daselablogofile}{assets/my-lab.pdf}
@@ -20,17 +25,22 @@
 \hypersetup{colorlinks=true,citecolor=DASEpurple,linkcolor=DASEpurple,urlcolor=DASEblue}
 \graphicspath{{assets/}}
 
-\title[DASE Beamer]{Designing reliable systems\\for real-world data}
-\subtitle{A modern, readable Beamer template for DASE}
+% YOUR PRESENTATION METADATA (the optional author/institute values go in the footer).
+\title[DASE template]{The DASE\\Beamer template}
+\subtitle{A guide to its design, features and editable examples}
 \author[Your Name]{Your Name}
 \institute[HKU Engineering]{HKU School of Engineering}
 \date{October 2026}
 
+% Automatically insert a plain chapter page for each numbered section.
 \AtBeginSection[]{
   \begin{frame}[plain]
     \sectionpage
   \end{frame}
 }
+
+% Guide-only wrapper: permits literal \end{frame} in displayed source.
+\newenvironment{guideframe}{\begin{frame}[fragile,environment=guideframe]}{\end{frame}}
 
 \begin{document}
 
@@ -38,197 +48,467 @@
   \titlepage
 \end{frame}
 
-\begin{frame}{A template that carries a point of view}
-  \framesubtitle{Use structure and colour to make the argument easier to follow}
+% 1. DESIGN: the palette, page types and footer are provided by the theme.
+\section{Design and navigation}
+
+\begin{frame}{One theme, your lab's presentation}
+  \framesubtitle{This deck is both a user guide and a collection of editable examples}
   \begin{columns}[T,onlytextwidth]
     \column{.31\textwidth}
-      \begin{block}{Start with the question}
-        Give each slide one job. A short title should tell the audience what to look for.
+      \begin{block}{A shared identity}
+        DASE branding, an HKU crest watermark and one orange chevron connect the opening, chapter and closing pages.
       \end{block}
     \column{.31\textwidth}
-      \begin{exampleblock}{Show the evidence}
-        Use a diagram, a number, or a compact comparison before adding more prose.
+      \begin{exampleblock}{Your team's identity}
+        Replace the lab logo image. It appears beneath DASE on all three page types and scales automatically.
       \end{exampleblock}
     \column{.31\textwidth}
-      \begin{alertblock}{Make the decision visible}
-        Use the orange accent sparingly for the result, risk, or next step that deserves attention.
+      \begin{alertblock}{Built-in boundaries}
+        Oversized headings end with an ellipsis. Their font size stays fixed and the content stays inside its placeholder.
       \end{alertblock}
   \end{columns}
   \vfill
+  \textcolor{DASEslate}{\small Find each example in \texttt{template.tex}; the visual rules live in \texttt{beamerthemeDASE.sty}.}
+\end{frame}
+
+\begin{frame}{The colour system}
+  \framesubtitle{Use the named colours directly in text, diagrams and plots}
   \begin{center}
-    {\color{DASEpurple}\large\bfseries One visual language. Many research stories.}
+    \begin{tikzpicture}[x=1cm,y=1cm]
+      \foreach \x/\c/\hex/\role in {
+        0/DASEpurple/562B82/Structure,
+        2.65/DASEorange/E25825/Attention,
+        5.3/DASEgreen/40B488/Examples,
+        7.95/DASEblue/6684BE/Supporting data,
+        10.6/DASEyellow/FFD532/Highlights} {
+        \fill[\c,rounded corners=2pt] (\x,0) rectangle ++(2.35,.82);
+        \node[anchor=north west,font=\small\bfseries] at (\x,-.13) {\c};
+        \node[anchor=north west,font=\scriptsize\ttfamily,text=DASEslate] at (\x,-.52) {\#\hex};
+        \node[anchor=north west,font=\scriptsize] at (\x,-.85) {\role};
+      }
+    \end{tikzpicture}
   \end{center}
-\end{frame}
-
-\section{The visual language}
-
-\begin{frame}{A small palette, a clear hierarchy}
-  \framesubtitle{The crest supplies the energy; DASE purple keeps the system coherent}
+  \medskip
   \begin{columns}[T,onlytextwidth]
-    \column{.52\textwidth}
-      \begin{tikzpicture}[x=1cm,y=1cm]
-        \foreach \x/\c/\name in {0/DASEpurple/DASE purple,1.15/HKUred/HKU red,2.3/DASEgreen/DASE green,3.45/DASEblue/DASE blue,4.6/DASEyellow/DASE yellow} {
-          \fill[\c,rounded corners=2pt] (\x,1.2) rectangle ++(1,1);
-          \node[anchor=north west,font=\scriptsize\sffamily,text width=1.02cm] at (\x,1.08) {\name};
-        }
-      \end{tikzpicture}
-      \vspace{0.95cm}
-      \begin{itemize}
-        \item Dark text on a warm white canvas keeps body copy comfortable.
-        \item Purple marks structure: titles, section pages, and primary actions.
-        \item Orange and yellow are reserved for emphasis, so they retain their signal.
-      \end{itemize}
-    \column{.42\textwidth}
-      \begin{block}{Type scale}
-        {\fontsize{22}{25}\selectfont\bfseries Slide title}\par\medskip
-        {\large\bfseries A useful subtitle}\par\smallskip
-        {\small Body copy should stay around 18--22pt on screen. Keep lines short and let the margins breathe.}
-      \end{block}
+    \column{.48\textwidth}
+      \textbf{Keep text easy to read}\par\smallskip
+      \small \texttt{HKUink} provides dark body text; \texttt{DASEslate} supports captions. \texttt{DASEpaper} and \texttt{DASEmist} provide the light backgrounds.
+    \column{.48\textwidth}
+      \textbf{Use accents with a purpose}\par\smallskip
+      \small Purple anchors the layout. Orange marks warnings and the current slide. Green and blue distinguish examples and data.
   \end{columns}
+  \vfill
+  {\small\texttt{\textbackslash textcolor\{DASEpurple\}\{Your text\}} \quad\textcolor{DASEpurple}{Your text}}
 \end{frame}
 
-\begin{frame}{Research question $\;\to\;$ evidence $\;\to\;$ decision}
+\begin{frame}{Page types and the progress footer}
+  \begin{columns}[T,onlytextwidth]
+    \column{.48\textwidth}
+      \begin{block}{Three special pages}
+        \begin{itemize}
+          \item \textbf{Title:} purple panel, title and subtitle.
+          \item \textbf{Chapter:} light panel, number centred beside the chapter title.
+          \item \textbf{Thank you:} purple panel, editable closing message.
+        \end{itemize}
+      \end{block}
+    \column{.48\textwidth}
+      \begin{exampleblock}{Content pages}
+        Dark headings, an optional subtitle and a light canvas leave the main area for your results. Blocks, lists, tables and figures share the palette.
+      \end{exampleblock}
+      \small All three special pages carry the DASE mark, your lab logo and the crest watermark.
+  \end{columns}
+  \medskip
+  \textbf{Read the footer below}\par\smallskip
+  \small Author/institute $\;\vert\;$ grouped progress dots $\;\vert\;$ chapter name $\;\vert\;$ content-slide number.
+  Purple dots are completed; orange is current; outlines are upcoming. Click a dot to jump to its slide. Gaps separate chapters.
+  \par\smallskip
+  \textcolor{DASEslate}{\scriptsize Plain pages and unnumbered frames are excluded; overlays share a dot. Compile twice after changing the slide order.}
+\end{frame}
+
+% 2. BUILDING BLOCKS: copy these frames and change their contents.
+\section{Build your slides}
+
+\begin{frame}{Blocks, lists and emphasis}
+  \framesubtitle{Three block environments communicate three different roles}
+  \begin{columns}[T,onlytextwidth]
+    \column{.31\textwidth}
+      \begin{block}{Standard block}
+        Use \texttt{block} for a definition, method or main claim.
+      \end{block}
+      \small
+      \begin{itemize}
+        \item A primary point.
+        \item A supporting point.
+          \begin{itemize}
+            \item A short sub-point.
+          \end{itemize}
+      \end{itemize}
+    \column{.31\textwidth}
+      \begin{exampleblock}{Example block}
+        Use \texttt{exampleblock} for an illustration, working example or observation.
+      \end{exampleblock}
+      \small
+      \begin{enumerate}
+        \item Define the input.
+        \item Run the method.
+        \item Compare the result.
+      \end{enumerate}
+    \column{.31\textwidth}
+      \begin{alertblock}{Alert block}
+        Use \texttt{alertblock} for a limitation, risk or action that needs attention.
+      \end{alertblock}
+      \small Use \textbf{bold} for a key phrase and \alert{\texttt{\textbackslash alert\{...\}}} for orange emphasis.
+  \end{columns}
+  \vfill
+  \textcolor{DASEslate}{\scriptsize Block headings also truncate automatically. Block bodies remain your responsibility: shorten them or split the slide.}
+\end{frame}
+
+\begin{frame}{A TikZ figure that uses the theme colours}
+  \framesubtitle{Vector diagrams stay sharp; labels and arrows remain editable in the source}
   \begin{center}
-    \begin{tikzpicture}[node distance=7mm and 9mm,every node/.style={align=center},
-      card/.style={draw=DASEline,rounded corners=3pt,minimum width=39mm,minimum height=25mm,inner sep=4mm},
-      arrow/.style={-{Latex[length=3mm]},very thick,DASEpurple}]
-      \node[card,fill=DASEpurple!10] (question) {\color{DASEpurple}\Large 01\\[-1mm]\normalsize Define the behaviour\\[1mm]\scriptsize What should change?};
-      \node[card,fill=DASEgreen!11,right=of question] (evidence) {\color{DASEgreen!60!black}\Large 02\\[-1mm]\normalsize Build the test\\[1mm]\scriptsize What would count as evidence?};
-      \node[card,fill=DASEorange!11,right=of evidence] (decision) {\color{DASEorange}\Large 03\\[-1mm]\normalsize Make the call\\[1mm]\scriptsize What can we claim?};
-      \draw[arrow] (question)--(evidence);
-      \draw[arrow] (evidence)--(decision);
+    \begin{tikzpicture}[
+      node distance=8mm,
+      card/.style={draw=DASEline,rounded corners=3pt,text width=3.15cm,
+        minimum height=2.2cm,align=center,inner sep=3mm},
+      flow/.style={-{Latex[length=3mm]},thick,DASEpurple}]
+      \node[card,fill=DASEpurple!9] (input) {\textcolor{DASEpurple}{\large\bfseries Input}\\[2mm]Measurements\\\scriptsize Define the units and scope};
+      \node[card,fill=DASEgreen!10,right=of input] (method) {\textcolor{DASEgreen!60!black}{\large\bfseries Method}\\[2mm]Process and model\\\scriptsize Explain the transformation};
+      \node[card,fill=DASEblue!10,right=of method] (output) {\textcolor{DASEblue!70!black}{\large\bfseries Output}\\[2mm]Interpret the result\\\scriptsize Show what the evidence means};
+      \draw[flow] (input) -- (method);
+      \draw[flow] (method) -- (output);
+      \draw[flow,dashed] (output.south) -- ++(0,-.65) -| (method.south);
+      \node[font=\scriptsize,text=DASEslate,anchor=north] at ([yshift=-.7cm]method.south) {Review and refine};
     \end{tikzpicture}
   \end{center}
   \vfill
-  \begin{alertblock}{Design principle}
-    A slide is easier to trust when the claim, the measurement, and the consequence appear together.
-  \end{alertblock}
+  \begin{block}{Reuse this figure}
+    Edit the nodes and edges in this frame's \texttt{tikzpicture}. Use \texttt{DASEpurple}, \texttt{DASEgreen} and \texttt{DASEblue} instead of hard-coded colours.
+  \end{block}
 \end{frame}
 
-\begin{frame}{Readable by default}
-  \framesubtitle{A few layout rules prevent most crowded slides}
-  \begin{columns}[T,onlytextwidth]
-    \column{.48\textwidth}
-      \begin{enumerate}
-        \item Put the conclusion in the title.
-        \item Keep each column to one thought.
-        \item Use a callout for the one number people should remember.
-      \end{enumerate}
-    \column{.48\textwidth}
-      \begin{tikzpicture}[every node/.style={font=\small\sffamily}]
-        \fill[DASEmist,rounded corners=3pt] (0,0) rectangle (5.3,3.55);
-        \fill[DASEpurple] (.35,2.95) rectangle (4.95,3.2);
-        \fill[DASEgreen] (.35,2.45) rectangle (3.9,2.7);
-        \fill[DASEblue] (.35,1.95) rectangle (4.5,2.2);
-        \fill[DASEorange] (.35,1.45) rectangle (2.9,1.7);
-        \node[anchor=west] at (.35,.95) {one idea per visual block};
-        \node[anchor=west,text=DASEslate] at (.35,.55) {space is part of the design};
-      \end{tikzpicture}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{A compact result slide}
-  \framesubtitle{Use a single visual and a sentence that interprets it}
-  \begin{columns}[T,onlytextwidth]
-    \column{.57\textwidth}
-      \begin{tikzpicture}[x=1cm,y=1cm]
-        \draw[DASEline] (0,0) -- (7.0,0);
-        \draw[DASEline] (0,1) -- (7.0,1);
-        \draw[DASEline] (0,2) -- (7.0,2);
-        \draw[DASEline] (0,3) -- (7.0,3);
-        \foreach \x/\lab/\a/\b in {0/Setup/1.3/2.2,1.7/Control/2.2/2.8,3.4/Stress/1.8/3.3,5.1/Target/2.6/3.0} {
-          \fill[DASEpurple!25] (\x,0) rectangle ++(.72,\a);
-          \fill[DASEpurple] (\x,\a) rectangle ++(.72,\b-\a);
-          \node[anchor=north,font=\scriptsize] at (\x+.36,-.14) {\lab};
-        }
-        \node[anchor=east,font=\scriptsize,text=DASEslate] at (-.1,3) {100\%};
-        \node[anchor=east,font=\scriptsize,text=DASEslate] at (-.1,2) { 75\%};
-        \node[anchor=east,font=\scriptsize,text=DASEslate] at (-.1,1) { 50\%};
-        \node[anchor=east,font=\scriptsize,text=DASEslate] at (-.1,0) {  0\%};
-      \end{tikzpicture}
-    \column{.37\textwidth}
-      \begin{block}{The takeaway}
-        The target case improves after the method sees the stress pattern, while the baseline stays flat.
-      \end{block}
-      \vspace{2mm}
-      \textcolor{DASEslate}{\scriptsize Add the unit, sample size, and uncertainty in the caption or notes.}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{Tables and callouts}
-  \begin{columns}[T,onlytextwidth]
-    \column{.59\textwidth}
-      \begin{table}
-        \centering
-        \small
-        \begin{tabular}{@{}lrrr@{}}
-          \toprule
-          \textbf{Condition} & \textbf{Accuracy} & \textbf{Cost} & \textbf{Change}\\
-          \midrule
-          Baseline & 0.71 & 1.00 & ---\\
-          With timing & 0.79 & 1.12 & +8 pts\\
-          With control & \textbf{0.84} & 1.18 & \textbf{+13 pts}\\
-          \bottomrule
-        \end{tabular}
-      \end{table}
-      \vspace{2mm}
-      {\scriptsize\color{DASEslate}A small table is often more useful than a dense chart when the comparison has only a few rows.}
-    \column{.35\textwidth}
-      \begin{alertblock}{Remember}
-        Highlight the decision variable, then leave supporting detail in the notes.
-      \end{alertblock}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{Make the evidence easy to read}
-  \framesubtitle{Sources support the claim without interrupting the story}
-  \begin{columns}[T,onlytextwidth]
-    \column{.60\textwidth}
+\begin{frame}{An image with its description}
+  \framesubtitle{A two-column layout gives the visual and its explanation their own space}
+  \begin{columns}[c,onlytextwidth]
+    \column{.42\textwidth}
+      \centering
+      \includegraphics[width=.95\linewidth,height=4.1cm,keepaspectratio]{images/4a.jpg}
+      \par\smallskip
+      {\scriptsize\color{DASEslate}Supplied HKU artwork: \texttt{images/4a.jpg}.}
+    \column{.53\textwidth}
+      \textbf{The supplied full-colour crest}\par\medskip
+      The detailed artwork illustrates an image-and-description slide. The watermark on the special pages uses the separate monochrome crest asset.
+      \par\medskip
       \begin{itemize}
-        \setlength{\itemsep}{1em}
-        \item Compare values on a common scale~\cite{tufte1983}.
-        \item Choose visual encodings that match the data and the task~\cite{munzner2014}.
-        \item Offer an overview, then zoom and filter for details~\cite{shneiderman1996}.
+        \item Replace the filename with your own image.
+        \item Set both a width and a maximum height.
+        \item Keep \texttt{keepaspectratio} to avoid stretching.
       \end{itemize}
-    \column{.34\textwidth}
-      \begin{block}{The takeaway}
-        A research slide should make both the evidence and its source easy to find.
-      \end{block}
+      \smallskip
+      \textcolor{DASEslate}{\small This JPEG has a white background. Use a transparent PNG or a vector PDF for a logo.}
   \end{columns}
 \end{frame}
 
-\section{Start from this file}
-
-\begin{frame}{Use the template in three moves}
+% Code uses verbatim support: mark the frame [fragile].
+\begin{frame}[fragile]{A readable code snippet}
+  \framesubtitle{Use a fragile frame for literal code; keep the example focused}
   \begin{columns}[T,onlytextwidth]
-    \column{.31\textwidth}
-      \begin{center}\dasebadge\end{center}
-      \vspace{2mm}
-      \textbf{1. Copy the folder}\par
-      \small Keep the `.sty` file beside your `.tex` file.
-    \column{.31\textwidth}
-      \begin{center}\tikz\node[fill=DASEgreen,rounded corners=2pt,text=white,font=\sffamily\bfseries,minimum width=1.5cm,minimum height=1.5cm]{02};\end{center}
-      \vspace{2mm}
-      \textbf{2. Set the metadata}\par
-      \small Replace the title, author, institute, and date in \texttt{template.tex}.
-    \column{.31\textwidth}
-      \begin{center}\tikz\node[fill=DASEorange,rounded corners=2pt,text=white,font=\sffamily\bfseries,minimum width=1.5cm,minimum height=1.5cm]{03};\end{center}
-      \vspace{2mm}
-      \textbf{3. Add your story}\par
-      \small Reuse the blocks, cards, and section pages as building pieces.
+    \column{.58\textwidth}
+      \begin{beamercolorbox}[wd=\linewidth,sep=3mm,rounded=true]{block body}
+\small
+\begin{Verbatim}
+def normalise(values):
+    """Scale a sequence to the range [0, 1]."""
+    low, high = min(values), max(values)
+    if high == low:
+        return [0.0 for _ in values]
+    return [(x - low) / (high - low)
+            for x in values]
+\end{Verbatim}
+      \end{beamercolorbox}
+    \column{.36\textwidth}
+      \begin{block}{Explain the useful part}
+        The constant-input case avoids division by zero. The remaining values share a common scale.
+      \end{block}
+      \small The snippet is literal text, not executed code. Edit it directly in \texttt{template.tex}.
+      \par\medskip
+      \textcolor{DASEslate}{\scriptsize Code lines do not use title truncation. Break long lines explicitly.}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Tables and mathematics}
+  \framesubtitle{Examples use illustrative data, not research results}
+  \begin{columns}[T,onlytextwidth]
+    \column{.54\textwidth}
+      \small
+      \begin{tabular}{@{}lrr@{}}
+        \toprule
+        \textbf{Illustrative method} & \textbf{Score} & \textbf{Time (ms)}\\
+        \midrule
+        Baseline & 0.71 & 12\\
+        Variant A & 0.79 & 15\\
+        Variant B & \textbf{0.84} & 18\\
+        \bottomrule
+      \end{tabular}
+      \par\medskip
+      \texttt{booktabs} supplies the rules. Put units in column headings and highlight only the values that support your point.
+    \column{.40\textwidth}
+      \begin{exampleblock}{A compact equation}
+        \[
+          \widehat{\mu}=\frac{1}{n}\sum_{i=1}^{n}x_i
+        \]
+        Define the symbols: $x_i$ is one observation and $n$ is the sample size.
+      \end{exampleblock}
   \end{columns}
   \vfill
-  \begin{center}\color{DASEslate}\small The theme is intentionally local: edit the style file when your group needs a different rhythm.\end{center}
+  \textcolor{DASEslate}{\small Keep tables, equations and captions within their column. Body content does not truncate automatically.}
 \end{frame}
 
+\begin{frame}{Citations and references are already connected}
+  \framesubtitle{Use numbered citations in the text and a bibliography at the end}
+  \begin{itemize}
+    \setlength{\itemsep}{.8em}
+    \item Show quantitative evidence on readable scales~\cite{tufte1983}.
+    \item Match the visual encoding to the data and task~\cite{munzner2014}.
+    \item Move from an overview to relevant details~\cite{shneiderman1996}.
+  \end{itemize}
+  \medskip
+  \begin{block}{Replace the example sources}
+    Edit \texttt{bib.bib}; cite an entry with \texttt{\textbackslash cite\{key\}}. The final references page lists the cited entries. Citation numbers and DOI links are clickable.
+  \end{block}
+  \small Rerun Biber when citations or bibliography entries change. The references frame allows page breaks when the list grows.
+\end{frame}
+
+\begin{frame}{What happens when an input is too long?}
+  \framesubtitle{The next chapter deliberately uses oversized text to demonstrate the safeguards}
+  \small
+  \begin{tabular}{@{}p{.40\textwidth}p{.54\textwidth}@{}}
+    \toprule
+    \textbf{Theme placeholder} & \textbf{Automatic behaviour}\\
+    \midrule
+    Slide title / subtitle & One line, then an ellipsis.\\[2mm]
+    Cover title / subtitle & At most two lines, then an ellipsis.\\[2mm]
+    Chapter title & At most two lines; number stays vertically centred.\\[2mm]
+    Block heading / footer fields & One line, then an ellipsis.\\
+    \bottomrule
+  \end{tabular}
+  \medskip
+  \begin{alertblock}{The original font size stays fixed}
+    The full text remains in your source. The theme shortens only its visible presentation; shorter wording is still better for your audience.
+  \end{alertblock}
+  \textcolor{DASEslate}{\scriptsize Paragraphs, code, tables and figures are authored normally. These safeguards apply to the theme's text placeholders.}
+\end{frame}
+
+% 3. LIVE OVERFLOW DEMOS: intentionally long chapter, slide, block and cover text.
+% The section title also exercises the single-line chapter field in the footer.
+\section{Handling oversized chapter titles and subtitles without overflowing the slide or shrinking the original font size}
+
+\begin{frame}{Practical IP based traffic generation for large distributed systems with complex conditional behaviour and long term temporal dependencies}
+  \framesubtitle{This deliberately oversized subtitle continues well beyond the available heading width so that the theme must shorten it automatically with an ellipsis}
+  \begin{block}{Live example: an oversized slide title and subtitle}
+    Look at the two heading lines above: both end with an ellipsis, at their normal font sizes. The long chapter name in the footer is shortened too.
+  \end{block}
+  \medskip
+  \textbf{Full title supplied in the source}\par\smallskip
+  {\small\color{DASEslate}Practical IP based traffic generation for large distributed systems with complex conditional behaviour and long term temporal dependencies}
+  \par\medskip
+  \textbf{What to do in your own deck}\par\smallskip
+  \small Edit the argument of \texttt{\textbackslash begin\{frame\}\{...\}} or \texttt{\textbackslash frametitle\{...\}}. Shorten the wording when the hidden ending matters.
+\end{frame}
+
+\begin{frame}{PracticalIPBasedTrafficGenerationWithAnExtremelyLongUnbrokenIdentifierThatCannotFitInsideTheAllocatedSlideHeadingWidth}
+  \framesubtitle{An unbroken identifier and an oversized block heading are bounded too}
+  \begin{block}{A deliberately oversized block heading describing every experimental setting and every condition until it is much too long to fit inside this block}
+    The heading is shortened; this body text remains untouched. The same rule applies to standard, example and alert block headings.
+  \end{block}
+  \medskip
+  \begin{columns}[T,onlytextwidth]
+    \column{.48\textwidth}
+      \textbf{No spaces to break at}\par\smallskip
+      \small The title above is a single long identifier. The theme can truncate text at character boundaries instead of allowing it to run into the margin.
+    \column{.48\textwidth}
+      \textbf{A narrow placeholder}\par\smallskip
+      \begin{exampleblock}{This example block title is deliberately much longer than the half-width column can accommodate}
+        A column's block heading uses that column's available width.
+      \end{exampleblock}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Two-line cover fields stay within their bounds}
+  \framesubtitle{The following page is a live cover demo, not a second presentation}
+  \begin{columns}[T,onlytextwidth]
+    \column{.48\textwidth}
+      \begin{block}{What you will see}
+        A title and subtitle that need more than two lines. Each stops after its second line and ends with an ellipsis. Author and date remain in their own areas.
+      \end{block}
+    \column{.48\textwidth}
+      \begin{exampleblock}{The chapter page just shown}
+        The chapter name also used its two-line limit. Its number was centred against the complete visible title, rather than only its first line.
+      \end{exampleblock}
+  \end{columns}
+  \medskip
+  \small This demo uses the same \texttt{\textbackslash titlepage} as the opening. The metadata changes are local to that frame; your normal presentation metadata returns afterwards.
+  \par\medskip
+  \textcolor{DASEslate}{\small The closing command \texttt{\textbackslash dasethankyou[Title]\{Subtitle\}} uses the same two-line limits.}
+\end{frame}
+
+% A scoped title-page stress example. Delete this frame for a real talk.
+\begin{frame}[plain]
+  \begingroup
+  \title{Practical IP based traffic generation for large distributed systems with complex conditional behaviour and long term temporal dependencies}
+  \subtitle{Overflow demo: this subtitle contains far more explanation than the cover's two-line placeholder can display, so its visible ending is replaced automatically by an ellipsis}
+  \titlepage
+  \endgroup
+\end{frame}
+
+% 4. CUSTOMISATION: exact files, metadata and minimal copyable patterns.
+\section{Make it yours}
+
+\begin{frame}{What to replace, and where}
+  \framesubtitle{Start from this folder; keep the theme and its supporting assets together}
+  \small
+  \begin{tabular}{@{}p{.34\textwidth}p{.60\textwidth}@{}}
+    \toprule
+    \textbf{File / location} & \textbf{Your change}\\
+    \midrule
+    \texttt{template.tex}: preamble & Set title, subtitle, author, institute and date.\\[2mm]
+    \texttt{assets/lab-logo.png} & Replace the placeholder with your lab/team image.\\[2mm]
+    \texttt{template.tex}: frames & Replace this guide with your chapters and content.\\[2mm]
+    \texttt{images/} or \texttt{assets/} & Add your figures; update their filenames in the source.\\[2mm]
+    \texttt{bib.bib} & Replace the sample sources and update citation keys.\\[2mm]
+    \texttt{beamerthemeDASE.sty} & Edit only when you need to change theme colours or layout.\\
+    \bottomrule
+  \end{tabular}
+  \vfill
+  \textcolor{DASEslate}{\scriptsize Keep \texttt{truncate.sty}, the DASE mark and both crest watermark PNGs with the theme. They support compilation and the default branding.}
+\end{frame}
+
+\begin{frame}[fragile]{Set your metadata and lab logo}
+  \begin{columns}[T,onlytextwidth]
+    \column{.57\textwidth}
+      \begin{beamercolorbox}[wd=\linewidth,sep=2mm,rounded=true]{block body}
+\scriptsize
+\begin{Verbatim}
+\title{Your presentation title}
+\subtitle{A useful subtitle}
+\author[Short Name]{Your full name}
+\institute[Your Lab]{Your lab / affiliation}
+\date{Your event and date}
+
+% Optional: use a different logo file.
+\renewcommand{\daselablogofile}
+  {assets/my-lab-logo.pdf}
+\end{Verbatim}
+      \end{beamercolorbox}
+    \column{.38\textwidth}
+      \textbf{The easy logo replacement}\par\smallskip
+      \small Overwrite \texttt{assets/lab-logo.png} with your own transparent PNG. No source edit is required.
+      \par\medskip
+      \textbf{Sizing is automatic}\par\smallskip
+      \small The reserved box has the DASE mark's width and height. Wide, tall and square images fit inside it without stretching.
+      \par\medskip
+      \textcolor{DASEslate}{\scriptsize Crop excess empty margins in your image. Optional author/institute values in square brackets control the footer.}
+  \end{columns}
+\end{frame}
+
+\begin{guideframe}
+  \frametitle{Copy a chapter, slide and block}
+  \begin{columns}[T,onlytextwidth]
+    \column{.57\textwidth}
+      \begin{beamercolorbox}[wd=\linewidth,sep=2mm,rounded=true]{block body}
+\scriptsize
+\begin{Verbatim}
+\section{Your chapter}
+% The chapter page is inserted automatically.
+
+\begin{frame}{Your slide title}
+  \framesubtitle{Optional subtitle}
+  \begin{block}{Your main point}
+    Replace this text with your content.
+  \end{block}
+\end{frame}
+
+\begin{frame}[plain]
+  \dasethankyou[Thank you]{Questions?}
+\end{frame}
+\end{Verbatim}
+      \end{beamercolorbox}
+    \column{.38\textwidth}
+      \begin{block}{Change the environment}
+        Use \texttt{exampleblock} or \texttt{alertblock} to switch the block's role and colours.
+      \end{block}
+      \small Keep the existing \texttt{\textbackslash AtBeginSection} setup for automatic chapter pages. Use \texttt{[fragile]} on frames containing verbatim code.
+      \par\medskip
+      \textcolor{DASEslate}{\scriptsize Special pages use \texttt{[plain]} to omit the content-page header and footer.}
+  \end{columns}
+\end{guideframe}
+
+\begin{guideframe}
+  \frametitle{Insert an image or a literal code example}
+  \begin{columns}[T,onlytextwidth]
+    \column{.48\textwidth}
+      \textbf{Fit an image to its column}\par\smallskip
+      \begin{beamercolorbox}[wd=\linewidth,sep=2mm,rounded=true]{block body}
+\scriptsize
+\begin{Verbatim}
+\includegraphics[
+  width=.95\linewidth,
+  height=4.1cm,
+  keepaspectratio
+]{images/4a.jpg}
+\end{Verbatim}
+      \end{beamercolorbox}
+      \small Replace the path. PDF is useful for vector diagrams; PNG/JPG are useful for raster images.
+    \column{.48\textwidth}
+      \textbf{Keep literal code in a fragile frame}\par\smallskip
+      \begin{beamercolorbox}[wd=\linewidth,sep=2mm,rounded=true]{block body}
+\scriptsize
+\begin{Verbatim}
+\begin{frame}[fragile]{Code example}
+  \begin{verbatim}
+    print("Your code goes here")
+  \end{verbatim}
+\end{frame}
+\end{Verbatim}
+      \end{beamercolorbox}
+      \small Use a short snippet and explain the relevant lines beside it. TikZ figures can use a normal frame.
+  \end{columns}
+\end{guideframe}
+
+\begin{frame}[fragile]{Compile, then check the result}
+  \framesubtitle{Run from the template folder; the bibliography requires Biber}
+  \begin{columns}[T,onlytextwidth]
+    \column{.42\textwidth}
+      \begin{beamercolorbox}[wd=\linewidth,sep=3mm,rounded=true]{block body}
+\small
+\begin{Verbatim}
+pdflatex template.tex
+biber template
+pdflatex template.tex
+pdflatex template.tex
+\end{Verbatim}
+      \end{beamercolorbox}
+      \small Replace \texttt{pdflatex} with \texttt{lualatex} for LuaLaTeX. The compiled deck is \texttt{template.pdf}.
+    \column{.53\textwidth}
+      \begin{enumerate}
+        \item Check that your lab logo, author and date are correct.
+        \item Review any ellipses: shorten important titles so their full meaning is visible.
+        \item Check image sizes, code lines and body content for overflow.
+        \item Check citation links, references and chapter progress dots.
+      \end{enumerate}
+  \end{columns}
+  \vfill
+  \textcolor{DASEslate}{\small The README contains the file map and build instructions. Delete the demonstration chapter and cover before sharing your own talk.}
+\end{frame}
+
+% References are unnumbered as a chapter, but their content page joins progress.
 \section*{References}
 \begin{frame}[t,allowframebreaks]{References}
-  \framesubtitle{Selected sources cited in this example}
+  \framesubtitle{Example sources cited in this guide; replace them with your own}
   \printbibliography[heading=none]
 \end{frame}
 
 \begin{frame}[plain]
-  \dasethankyou{Questions, discussion, and the next \mbox{experiment.}}
+  \dasethankyou{Replace the metadata, add your lab logo, and make the slides yours.}
 \end{frame}
 
 \end{document}
