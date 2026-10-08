@@ -42,7 +42,7 @@ The included `template.tex` is a visual sample deck. Replace its metadata and sl
 - A warm off-white canvas and dark ink keep body text readable on projectors and video calls.
 - DASE purple carries structure; the HKU crest colours are accents for diagrams, blocks, and emphasis.
 - Section pages, title pages, footers, blocks, lists, tables, and simple diagram cards are defined in the theme file.
-- The bottom footer shows clickable slide dots grouped by chapter: completed slides are purple, the current slide is orange, and upcoming slides are outlined. Chapter and deck counts include content frames; plain pages and unnumbered frames are excluded, and overlays share one dot. Compile twice after adding or reordering slides to refresh progress.
+- The bottom footer shows clickable slide dots grouped by chapter: completed slides are purple, the current slide is orange, and upcoming slides are outlined. The footer uses one line: author and institute, progress dots, the current slide title, and its content-slide number. Plain pages and unnumbered frames are excluded from progress and numbering, and overlays share one dot. Use `\frametitle[Short title]{Full title}` to shorten long footer titles. Compile twice after adding or reordering slides to refresh progress.
 - The monochrome HKU crest from the supplied 2a branding artwork appears as a large, low-contrast watermark on title, section, and closing pages.
 - Cover and closing pages use a DASE purple field to the right of the orange divider, with light typography for contrast.
 - Title, section, and closing pages share a left-pointing chevron with an orange edge and its apex 72% down the slide. Section pages stay light; title and closing pages use purple.
