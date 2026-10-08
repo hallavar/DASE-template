@@ -6,19 +6,27 @@ The DASE fork keeps the upstream repository's modular example files and assets, 
 
 ## Compile
 
-From this directory, run either:
+The sample includes numeric citations and a references slide, using `biblatex` and Biber. From this directory, run:
 
 ```bash
 pdflatex template.tex
+biber template
+pdflatex template.tex
+pdflatex template.tex
 ```
 
-or:
+Or use LuaLaTeX:
 
 ```bash
 lualatex template.tex
+biber template
+lualatex template.tex
+lualatex template.tex
 ```
 
-The included `template.tex` is a visual sample deck. Replace its metadata and slide content with your presentation. The theme is local, so `beamerthemeDASE.sty` should stay beside the source file. The copied assets are in `assets/`:
+Add sources to `bib.bib` and cite them with `\cite{key}`. Citation numbers link to their bibliography entries. The references frame splits into additional slides when needed; rerun Biber after changing citations or bibliography entries.
+
+The included `template.tex` is a visual sample deck. Replace its metadata and slide content with your presentation. Keep `beamerthemeDASE.sty` and `bib.bib` beside the source file. The copied assets are in `assets/`:
 
 - `HKU_Engineering.png` — supplied Faculty of Engineering mark used on the title and closing slides.
 - `HKU_English_logo.png` — supplied HKU English mark for optional use in custom layouts.

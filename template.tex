@@ -1,6 +1,7 @@
 \documentclass[aspectratio=169,10pt]{beamer}
 
-% Compile with either `pdflatex main.tex` or `lualatex main.tex`.
+% Compile: pdflatex template, biber template, then pdflatex template twice.
+% LuaLaTeX can replace pdfLaTeX in the same sequence.
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
@@ -9,6 +10,12 @@
 \usepackage{booktabs}
 \usepackage{tikz}
 \usepackage{beamerthemeDASE}
+\usepackage[backend=biber,style=numeric,sorting=none,giveninits=true,
+  maxbibnames=3,isbn=false,url=false]{biblatex}
+\addbibresource{bib.bib}
+\DeclareFieldFormat{doi}{DOI\addcolon\space\href{https://doi.org/#1}{\nolinkurl{#1}}}
+\setlength{\bibitemsep}{1em}
+\hypersetup{colorlinks=true,citecolor=DASEpurple,linkcolor=DASEpurple,urlcolor=DASEblue}
 \graphicspath{{assets/}}
 
 \title[DASE Beamer]{Designing reliable systems\\for real-world data}
@@ -171,6 +178,23 @@
   \end{columns}
 \end{frame}
 
+\begin{frame}{Make the evidence easy to read}
+  \framesubtitle{Sources support the claim without interrupting the story}
+  \begin{columns}[T,onlytextwidth]
+    \column{.60\textwidth}
+      \begin{itemize}
+        \setlength{\itemsep}{1em}
+        \item Compare values on a common scale~\cite{tufte1983}.
+        \item Choose visual encodings that match the data and the task~\cite{munzner2014}.
+        \item Offer an overview, then zoom and filter for details~\cite{shneiderman1996}.
+      \end{itemize}
+    \column{.34\textwidth}
+      \begin{block}{The takeaway}
+        A research slide should make both the evidence and its source easy to find.
+      \end{block}
+  \end{columns}
+\end{frame}
+
 \section{Start from this file}
 
 \begin{frame}{Use the template in three moves}
@@ -184,7 +208,7 @@
       \begin{center}\tikz\node[fill=DASEgreen,rounded corners=2pt,text=white,font=\sffamily\bfseries,minimum width=1.5cm,minimum height=1.5cm]{02};\end{center}
       \vspace{2mm}
       \textbf{2. Set the metadata}\par
-      \small Replace the title, author, institute, and date in `main.tex`.
+      \small Replace the title, author, institute, and date in \texttt{template.tex}.
     \column{.31\textwidth}
       \begin{center}\tikz\node[fill=DASEorange,rounded corners=2pt,text=white,font=\sffamily\bfseries,minimum width=1.5cm,minimum height=1.5cm]{03};\end{center}
       \vspace{2mm}
@@ -193,6 +217,12 @@
   \end{columns}
   \vfill
   \begin{center}\color{DASEslate}\small The theme is intentionally local: edit the style file when your group needs a different rhythm.\end{center}
+\end{frame}
+
+\section*{References}
+\begin{frame}[t,allowframebreaks]{References}
+  \framesubtitle{Selected sources cited in this example}
+  \printbibliography[heading=none]
 \end{frame}
 
 \begin{frame}[plain]

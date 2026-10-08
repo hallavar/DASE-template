@@ -52,6 +52,11 @@
 \setbeamercolor{block body example}{fg=HKUink,bg=DASEgreen!10}
 \setbeamercolor{author in head/foot}{fg=DASEslate,bg=DASEpaper}
 \setbeamercolor{date in head/foot}{fg=DASEslate,bg=DASEpaper}
+\setbeamercolor{bibliography item}{fg=DASEpurple}
+\setbeamercolor{bibliography entry author}{fg=HKUink}
+\setbeamercolor{bibliography entry title}{fg=DASEpurple}
+\setbeamercolor{bibliography entry location}{fg=DASEslate}
+\setbeamercolor{bibliography entry note}{fg=DASEslate}
 
 \setbeamerfont{title}{family=\sffamily,series=\bfseries,size=\fontsize{20}{24}\selectfont}
 \setbeamerfont{subtitle}{family=\sffamily,size=\fontsize{11}{14}\selectfont}
@@ -63,6 +68,13 @@
 \setbeamerfont{block title}{family=\sffamily,series=\bfseries,size=\normalsize}
 \setbeamerfont{block body}{family=\sffamily,size=\small}
 \setbeamerfont{footline}{family=\sffamily,size=\fontsize{6.8}{8}\selectfont}
+\setbeamerfont{bibliography item}{family=\sffamily,series=\bfseries,size=\small}
+\setbeamerfont{bibliography entry author}{family=\sffamily,series=\mdseries,size=\small}
+\setbeamerfont{bibliography entry title}{family=\sffamily,series=\bfseries,size=\small}
+\setbeamerfont{bibliography entry location}{family=\sffamily,series=\mdseries,size=\small}
+\setbeamerfont{bibliography entry note}{family=\sffamily,series=\mdseries,size=\small}
+\setbeamertemplate{frametitle continuation}{%
+  \ifnum\insertcontinuationcount>1\relax\space(\insertcontinuationcount)\fi}
 
 \setbeamertemplate{itemize item}{%
   \tikz[baseline=-0.6ex]\fill[DASEgreen] (0,0) -- (0.7ex,0.35ex) -- (0,0.7ex) -- cycle;}
