@@ -8,7 +8,7 @@ The DASE fork keeps the upstream repository's modular example files and assets, 
 
 Open `template.pdf` for the illustrated guide; edit `template.tex` to reuse its examples. The deck covers:
 
-- Theme colours, title/chapter/closing pages, lab branding and clickable chapter progress.
+- A clickable table of contents, theme colours, title/chapter/closing pages, lab branding and chapter progress.
 - Standard, example and alert blocks; nested lists; a TikZ diagram; the supplied `images/4a.jpg` with a description; literal code; tables and mathematics.
 - Numeric citations, a references page and clickable DOI links.
 - Live overflow examples: a long chapter title, slide title/subtitle, an unbroken identifier, block headings and cover/closing fields with their separate limits.
