@@ -114,9 +114,11 @@
 % The left-pointing apex sits at 72% of the page height.
 \newcommand{\dasepanel}[2]{%
   \path[use as bounding box] (current page.north west) rectangle (current page.south east);
-  \coordinate (daseTop) at ([xshift=.40\paperwidth]current page.north west);
+  % Extend the divider a fraction beyond the page so the orange stroke is
+  % clipped at the frame edge rather than ending with a visible gap.
+  \coordinate (daseTop) at ([xshift=.40\paperwidth,yshift=.08cm]current page.north west);
   \coordinate (daseTip) at ([xshift=.18\paperwidth,yshift=-.72\paperheight]current page.north west);
-  \coordinate (daseBottom) at ([xshift=.40\paperwidth]current page.south west);
+  \coordinate (daseBottom) at ([xshift=.40\paperwidth,yshift=-.08cm]current page.south west);
   \fill[#1] (current page.north west) rectangle (current page.south east);
   \fill[#2] (daseTop) -- (daseTip) -- (daseBottom)
     -- (current page.south east) -- (current page.north east) -- cycle;
