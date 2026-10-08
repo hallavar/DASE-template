@@ -81,9 +81,9 @@
 % The left-pointing apex sits at 65% of the page height.
 \newcommand{\dasepanel}[2]{%
   \path[use as bounding box] (current page.north west) rectangle (current page.south east);
-  \coordinate (daseTop) at ([xshift=.34\paperwidth]current page.north west);
-  \coordinate (daseTip) at ([xshift=.16\paperwidth,yshift=-.65\paperheight]current page.north west);
-  \coordinate (daseBottom) at ([xshift=.34\paperwidth]current page.south west);
+  \coordinate (daseTop) at ([xshift=.40\paperwidth]current page.north west);
+  \coordinate (daseTip) at ([xshift=.18\paperwidth,yshift=-.65\paperheight]current page.north west);
+  \coordinate (daseBottom) at ([xshift=.40\paperwidth]current page.south west);
   \fill[#1] (current page.north west) rectangle (current page.south east);
   \fill[#2] (daseTop) -- (daseTip) -- (daseBottom)
     -- (current page.south east) -- (current page.north east) -- cycle;
