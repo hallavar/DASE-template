@@ -88,8 +88,9 @@
 % The official DASE mark is rasterised from assets/DASE.svg into the bundled
 % assets/DASE.png so both pdfLaTeX and LuaLaTeX can use it without shell escape.
 \newcommand{\dasebadge}{\includegraphics[width=.24\paperwidth]{assets/DASE.png}}
-% Replace this image to brand the deck for a lab or team.  The reserved slot
-% matches the DASE mark; fit any aspect ratio without stretching the artwork.
+% Replace this image to brand the deck for a lab or team.  Use a PNG with an
+% alpha channel (RGBA), or a PDF/SVG that preserves transparency; JPG files
+% usually carry a white background.  The reserved slot matches the DASE mark.
 \newcommand{\daselablogofile}{assets/lab-logo.png}
 \newsavebox{\dase@badgebox}
 \newcommand{\daselablogo}{%
