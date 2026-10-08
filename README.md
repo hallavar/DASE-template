@@ -23,6 +23,7 @@ The included `template.tex` is a visual sample deck. Replace its metadata and sl
 - `HKU_Engineering.png` — supplied Faculty of Engineering mark used on the title and closing slides.
 - `HKU_English_logo.png` — supplied HKU English mark for optional use in custom layouts.
 - `DASE.svg` — supplied DASE vector artwork kept with the template for future vector workflows.
+- `DASE.png` — compile-ready raster export of the supplied DASE mark, used by the theme.
 
 ## Design choices
 
