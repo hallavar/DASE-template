@@ -105,6 +105,36 @@
   \draw[white,line width=3.5pt,line cap=round,line join=round]
     ([xshift=.22cm,yshift=-.22cm]current page.north west) rectangle
     ([xshift=-.22cm,yshift=.22cm]current page.south east);}
+\newcommand{\daseorganicsection}{%
+  \fill[DASEpaper] (current page.north west) rectangle (current page.south east);
+  % The boundary is a single, deliberately off-centre wave.  It starts and
+  % ends on the page edge, so no separate straight divider or bottom rule is
+  % introduced when the grey field is closed.
+  \coordinate (daseSA) at ([xshift=.34\paperwidth,yshift=0pt]current page.north west);
+  \coordinate (daseSB) at ([xshift=.45\paperwidth,yshift=-.28\paperheight]current page.north west);
+  \coordinate (daseSC) at ([xshift=.27\paperwidth,yshift=-.56\paperheight]current page.north west);
+  \coordinate (daseSD) at ([xshift=.41\paperwidth,yshift=-.82\paperheight]current page.north west);
+  \coordinate (daseSE) at ([xshift=.37\paperwidth,yshift=-1.0\paperheight]current page.north west);
+  \coordinate (daseSAone) at ([xshift=.39\paperwidth,yshift=-.10\paperheight]current page.north west);
+  \coordinate (daseSAtwo) at ([xshift=.45\paperwidth,yshift=-.18\paperheight]current page.north west);
+  \coordinate (daseSBone) at ([xshift=.45\paperwidth,yshift=-.39\paperheight]current page.north west);
+  \coordinate (daseSBtwo) at ([xshift=.28\paperwidth,yshift=-.45\paperheight]current page.north west);
+  \coordinate (daseSCone) at ([xshift=.26\paperwidth,yshift=-.67\paperheight]current page.north west);
+  \coordinate (daseSCtwo) at ([xshift=.40\paperwidth,yshift=-.73\paperheight]current page.north west);
+  \coordinate (daseSDone) at ([xshift=.42\paperwidth,yshift=-.91\paperheight]current page.north west);
+  \coordinate (daseSDtwo) at ([xshift=.39\paperwidth,yshift=-.97\paperheight]current page.north west);
+  \path[fill=DASEmist]
+    (current page.north west) -- (daseSA)
+      .. controls (daseSAone) and (daseSAtwo) .. (daseSB)
+      .. controls (daseSBone) and (daseSBtwo) .. (daseSC)
+      .. controls (daseSCone) and (daseSCtwo) .. (daseSD)
+      .. controls (daseSDone) and (daseSDtwo) .. (daseSE)
+      -- (current page.south west) -- cycle;
+  \draw[DASEorange,line width=5pt,line cap=round,line join=round]
+    (daseSA) .. controls (daseSAone) and (daseSAtwo) .. (daseSB)
+      .. controls (daseSBone) and (daseSBtwo) .. (daseSC)
+      .. controls (daseSCone) and (daseSCtwo) .. (daseSD)
+      .. controls (daseSDone) and (daseSDtwo) .. (daseSE);}
 
 \defbeamertemplate*{frametitle}{DASE}{%
   \nointerlineskip
@@ -146,9 +176,7 @@
 
 \defbeamertemplate*{section page}{DASE}{%
   \begin{tikzpicture}[remember picture,overlay]
-    \fill[DASEpaper] (current page.north west) rectangle (current page.south east);
-    \fill[DASEmist] (current page.north west) rectangle ([xshift=.31\paperwidth]current page.south west);
-    \dasedivider
+    \daseorganicsection
     \node[opacity=.09,anchor=center] at ([xshift=.76\paperwidth,yshift=-.54\paperheight]current page.north west) {\dasewatermark};
     \node[anchor=north west] at ([xshift=.48cm,yshift=-.48cm]current page.north west) {\dasebadge};
     \node[anchor=west,text=DASEpurple,font=\sffamily\bfseries\fontsize{28}{32}\selectfont] at ([xshift=.36\paperwidth]current page.west) {\insertsectionnumber};
