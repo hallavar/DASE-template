@@ -76,6 +76,7 @@
 % assets/DASE.png so both pdfLaTeX and LuaLaTeX can use it without shell escape.
 \newcommand{\dasebadge}{\includegraphics[width=.24\paperwidth]{assets/DASE.png}}
 \newcommand{\dasewatermark}{\includegraphics[height=.70\paperheight]{assets/HKU_crest_bw.png}}
+\newcommand{\dasewatermarklight}{\includegraphics[height=.70\paperheight]{assets/HKU_crest_white.png}}
 
 \defbeamertemplate*{frametitle}{DASE}{%
   \nointerlineskip
@@ -104,14 +105,15 @@
 
 \defbeamertemplate*{title page}{DASE}{%
   \begin{tikzpicture}[remember picture,overlay]
+    \fill[DASEpurple] (current page.north west) rectangle (current page.south east);
     \fill[DASEmist] (current page.north west) rectangle ([xshift=.31\paperwidth]current page.south west);
     \fill[DASEorange] ([xshift=.31\paperwidth]current page.north west) rectangle ([xshift=.32\paperwidth]current page.south west);
-    \node[opacity=.09,anchor=center] at ([xshift=.76\paperwidth,yshift=-.54\paperheight]current page.north west) {\dasewatermark};
+    \node[opacity=.10,anchor=center] at ([xshift=.76\paperwidth,yshift=-.54\paperheight]current page.north west) {\dasewatermarklight};
     \node[anchor=north west] at ([xshift=.48cm,yshift=-.48cm]current page.north west) {\dasebadge};
-    \node[anchor=west,text width=.59\paperwidth,align=left] at ([xshift=.375\paperwidth,yshift=.17\paperheight]current page.west) {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle};
-    \node[anchor=north west,text width=.57\paperwidth,align=left] at ([xshift=.375\paperwidth,yshift=-.51\paperheight]current page.north west) {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle};
-    \node[anchor=south west] at ([xshift=.375\paperwidth,yshift=.9cm]current page.south west) {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor};
-    \node[anchor=south east] at ([xshift=-.78cm,yshift=.9cm]current page.south east) {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate};
+    \node[anchor=west,text width=.59\paperwidth,align=left] at ([xshift=.375\paperwidth,yshift=.17\paperheight]current page.west) {\usebeamerfont{title}\color{white}\inserttitle};
+    \node[anchor=north west,text width=.57\paperwidth,align=left] at ([xshift=.375\paperwidth,yshift=-.51\paperheight]current page.north west) {\usebeamerfont{subtitle}\color{white!82}\insertsubtitle};
+    \node[anchor=south west] at ([xshift=.375\paperwidth,yshift=.9cm]current page.south west) {\usebeamerfont{author}\color{white}\insertauthor};
+    \node[anchor=south east] at ([xshift=-.78cm,yshift=.9cm]current page.south east) {\usebeamerfont{date}\color{white!82}\insertdate};
   \end{tikzpicture}%
   \strut
 }

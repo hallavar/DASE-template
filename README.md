@@ -25,6 +25,7 @@ The included `template.tex` is a visual sample deck. Replace its metadata and sl
 - `DASE.svg` — supplied DASE vector artwork kept with the template for future vector workflows.
 - `DASE.png` — compile-ready raster export of the supplied DASE mark, used by the theme.
 - `HKU_crest_bw.png` — transparent monochrome crest prepared from the supplied `2a.pdf` artwork for watermark use.
+- `HKU_crest_white.png` — transparent white crest for watermark use on dark cover pages.
 - `images/2a.ai.ps` and `images/4a.jpg` — supplied source branding references retained in the fork.
 
 ## Design choices
@@ -34,6 +35,7 @@ The included `template.tex` is a visual sample deck. Replace its metadata and sl
 - DASE purple carries structure; the HKU crest colours are accents for diagrams, blocks, and emphasis.
 - Section pages, title pages, footers, blocks, lists, tables, and simple diagram cards are defined in the theme file.
 - The monochrome HKU crest from the supplied 2a branding artwork appears as a large, low-contrast watermark on title, section, and closing pages.
+- Cover and closing pages use a DASE purple field to the right of the orange divider, with light typography for contrast.
 
 If you need a different department name or a dark title, edit the metadata in `template.tex` and the colour definitions near the top of `beamerthemeDASE.sty`.
 
