@@ -25,6 +25,7 @@ The included `template.tex` is a visual sample deck. Replace its metadata and sl
 - `DASE.svg` — supplied DASE vector artwork kept with the template for future vector workflows.
 - `DASE.png` — compile-ready raster export of the supplied DASE mark, used by the theme.
 - `HKU_crest_bw.png` — transparent monochrome crest prepared from the supplied `2a.pdf` artwork for watermark use.
+- `images/2a.ai.ps` and `images/4a.jpg` — supplied source branding references retained in the fork.
 
 ## Design choices
 
