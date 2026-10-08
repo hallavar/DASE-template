@@ -78,11 +78,11 @@
 \newcommand{\dasewatermark}{\includegraphics[height=.70\paperheight]{assets/HKU_crest_bw.png}}
 \newcommand{\dasewatermarklight}{\includegraphics[height=.70\paperheight]{assets/HKU_crest_white.png}}
 % One shared geometric chevron for all opening, section, and closing pages.
-% The left-pointing apex sits at 65% of the page height.
+% The left-pointing apex sits at 72% of the page height.
 \newcommand{\dasepanel}[2]{%
   \path[use as bounding box] (current page.north west) rectangle (current page.south east);
   \coordinate (daseTop) at ([xshift=.40\paperwidth]current page.north west);
-  \coordinate (daseTip) at ([xshift=.18\paperwidth,yshift=-.65\paperheight]current page.north west);
+  \coordinate (daseTip) at ([xshift=.18\paperwidth,yshift=-.72\paperheight]current page.north west);
   \coordinate (daseBottom) at ([xshift=.40\paperwidth]current page.south west);
   \fill[#1] (current page.north west) rectangle (current page.south east);
   \fill[#2] (daseTop) -- (daseTip) -- (daseBottom)

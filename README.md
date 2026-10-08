@@ -36,7 +36,7 @@ The included `template.tex` is a visual sample deck. Replace its metadata and sl
 - Section pages, title pages, footers, blocks, lists, tables, and simple diagram cards are defined in the theme file.
 - The monochrome HKU crest from the supplied 2a branding artwork appears as a large, low-contrast watermark on title, section, and closing pages.
 - Cover and closing pages use a DASE purple field to the right of the orange divider, with light typography for contrast.
-- Title, section, and closing pages share a left-pointing chevron with an orange edge and its apex 65% down the slide. Section pages stay light; title and closing pages use purple.
+- Title, section, and closing pages share a left-pointing chevron with an orange edge and its apex 72% down the slide. Section pages stay light; title and closing pages use purple.
 
 If you need a different department name or a dark title, edit the metadata in `template.tex` and the colour definitions near the top of `beamerthemeDASE.sty`.
 
