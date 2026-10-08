@@ -1,12 +1,43 @@
-# The University of Hong Kong (HKU) Beamer Presentation Template
+# DASE Beamer template
 
-This LateX template is for **HKUers** to prepare their **presentation**. The project is based on the template of [Singapore Management University (SMU) Beamer Presentation Template](https://github.com/felixnie/smu-beamer/).
+A local DASE fork of [VincentXWD/hku_beamer_template](https://github.com/VincentXWD/hku_beamer_template) for the Department of Data Science and Engineering, HKU School of Engineering. The original repository is kept as the `upstream` Git remote so future improvements can be compared or merged deliberately.
 
-## Overview
-<img src="./assets/preview_1.png" width="800">
-<img src="./assets/preview_2.png" width="800">
-<img src="./assets/preview_4.png" width="800">
-<img src="./assets/preview_5.png" width="800">
+The DASE fork keeps the upstream repository's modular example files and assets, while `template.tex` is the new canonical entry point. It uses the supplied HKU Engineering and DASE marks, a restrained DASE purple accent, and supporting colours sampled from the HKU crest.
 
-## Open the project on Overleaf
-TBD.
+## Compile
+
+From this directory, run either:
+
+```bash
+pdflatex template.tex
+```
+
+or:
+
+```bash
+lualatex template.tex
+```
+
+The included `template.tex` is a visual sample deck. Replace its metadata and slide content with your presentation. The theme is local, so `beamerthemeDASE.sty` should stay beside the source file. The copied assets are in `assets/`:
+
+- `HKU_Engineering.png` — supplied Faculty of Engineering mark used on the title and closing slides.
+- `HKU_English_logo.png` — supplied HKU English mark for optional use in custom layouts.
+- `DASE.svg` — supplied DASE vector artwork kept with the template for future vector workflows.
+
+## Design choices
+
+- `aspectratio=169` gives a current presentation format.
+- A warm off-white canvas and dark ink keep body text readable on projectors and video calls.
+- DASE purple carries structure; the HKU crest colours are accents for diagrams, blocks, and emphasis.
+- Section pages, title pages, footers, blocks, lists, tables, and simple diagram cards are defined in the theme file.
+
+If you need a different department name or a dark title, edit the metadata in `template.tex` and the colour definitions near the top of `beamerthemeDASE.sty`.
+
+To see the source relationship:
+
+```bash
+git remote -v
+git log --oneline --decorate -5
+```
+
+The initial commit is inherited from the upstream HKU template; the DASE changes are the working-tree changes in this local fork.

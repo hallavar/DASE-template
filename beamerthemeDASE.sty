@@ -1,0 +1,149 @@
+%% beamerthemeDASE.sty
+%% A clean, high-contrast Beamer theme for DASE / HKU Engineering.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeDASE}[2026/10/08 DASE Beamer theme]
+
+\RequirePackage{xcolor}
+\RequirePackage{tikz}
+\RequirePackage{graphicx}
+\RequirePackage{booktabs}
+\usetikzlibrary{arrows.meta,calc,positioning,shapes.geometric}
+\makeatletter
+
+% HKU crest colours, with the DASE purple as the organising accent.
+\definecolor{HKUred}{HTML}{EE3124}
+\definecolor{HKUgreen}{HTML}{35B79A}
+\definecolor{HKUblue}{HTML}{3D9FD6}
+\definecolor{HKUgold}{HTML}{F4C400}
+\definecolor{HKUink}{HTML}{231F20}
+\definecolor{DASEpurple}{HTML}{562B82}
+\definecolor{DASEviolet}{HTML}{7653A6}
+\definecolor{DASEgreen}{HTML}{40B488}
+\definecolor{DASEblue}{HTML}{6684BE}
+\definecolor{DASEorange}{HTML}{E25825}
+\definecolor{DASEyellow}{HTML}{FFD532}
+\definecolor{DASEslate}{HTML}{667085}
+\definecolor{DASEpaper}{HTML}{F8F9FB}
+\definecolor{DASEmist}{HTML}{EEF1F5}
+\definecolor{DASEline}{HTML}{D9DEE8}
+
+\mode<presentation>
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=0.78cm,text margin right=0.78cm}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{background canvas}{\color{DASEpaper}}
+
+\setbeamercolor{normal text}{fg=HKUink,bg=DASEpaper}
+\setbeamercolor{structure}{fg=DASEpurple}
+\setbeamercolor{alerted text}{fg=DASEorange}
+\setbeamercolor{example text}{fg=DASEgreen}
+\setbeamercolor{frametitle}{fg=HKUink,bg=DASEpaper}
+\setbeamercolor{framesubtitle}{fg=DASEslate}
+\setbeamercolor{title}{fg=HKUink}
+\setbeamercolor{subtitle}{fg=DASEslate}
+\setbeamercolor{author}{fg=DASEslate}
+\setbeamercolor{institute}{fg=DASEslate}
+\setbeamercolor{date}{fg=DASEslate}
+\setbeamercolor{block title}{fg=white,bg=DASEpurple}
+\setbeamercolor{block body}{fg=HKUink,bg=DASEmist}
+\setbeamercolor{block title alerted}{fg=white,bg=DASEorange}
+\setbeamercolor{block body alerted}{fg=HKUink,bg=DASEorange!10}
+\setbeamercolor{block title example}{fg=white,bg=DASEgreen!80!black}
+\setbeamercolor{block body example}{fg=HKUink,bg=DASEgreen!10}
+\setbeamercolor{author in head/foot}{fg=DASEslate,bg=DASEpaper}
+\setbeamercolor{date in head/foot}{fg=DASEslate,bg=DASEpaper}
+
+\setbeamerfont{title}{family=\sffamily,series=\bfseries,size=\fontsize{22}{26}\selectfont}
+\setbeamerfont{subtitle}{family=\sffamily,size=\fontsize{12}{15}\selectfont}
+\setbeamerfont{author}{family=\sffamily,series=\bfseries,size=\large}
+\setbeamerfont{institute}{family=\sffamily,size=\small}
+\setbeamerfont{date}{family=\sffamily,size=\small}
+\setbeamerfont{frametitle}{family=\sffamily,series=\bfseries,size=\fontsize{17}{20}\selectfont}
+\setbeamerfont{framesubtitle}{family=\sffamily,size=\small}
+\setbeamerfont{block title}{family=\sffamily,series=\bfseries,size=\normalsize}
+\setbeamerfont{block body}{family=\sffamily,size=\small}
+\setbeamerfont{footline}{family=\sffamily,size=\fontsize{6.8}{8}\selectfont}
+
+\setbeamertemplate{itemize item}{%
+  \tikz[baseline=-0.6ex]\fill[DASEgreen] (0,0) -- (0.7ex,0.35ex) -- (0,0.7ex) -- cycle;}
+\setbeamertemplate{itemize subitem}{%
+  \tikz[baseline=-0.6ex]\fill[DASEblue] (0,0) circle (0.32ex);}
+\setbeamertemplate{enumerate item}{%
+  \tikz[baseline=-0.55ex]\node[fill=DASEpurple,text=white,circle,inner sep=0pt,minimum size=1.35em,font=\scriptsize\bfseries]{\insertenumlabel};}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+% A compact DASE badge used on title and section slides. The supplied
+% vector artwork is kept in assets/DASE.svg; this badge remains pdflatex-safe.
+\newcommand{\dasebadge}{%
+  \begin{tikzpicture}[x=1ex,y=1ex,baseline=-0.45ex]
+    \path[fill=DASEorange,rounded corners=0.25ex] (0,0) rectangle (3.4,3.4);
+    \path[fill=DASEyellow] (3.4,0) rectangle (6.8,3.4);
+    \path[fill=DASEgreen] (0,3.4) rectangle (3.4,6.8);
+    \path[fill=DASEblue] (3.4,3.4) rectangle (6.8,6.8);
+    \node[font=\sffamily\bfseries\fontsize{9}{9}\selectfont,text=white] at (3.4,3.4) {DASE};
+  \end{tikzpicture}}
+
+\defbeamertemplate*{frametitle}{DASE}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=\textwidth,ht=1.36cm,dp=0.28cm,leftskip=0.78cm,rightskip=0.78cm]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle\par
+    \ifx\insertframesubtitle\@empty\else
+      {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\par}
+    \fi
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=\textwidth,ht=0.055cm,dp=0pt]{structure}\end{beamercolorbox}\par
+}
+
+\defbeamertemplate*{footline}{DASE}{%
+  \leavevmode
+  \begin{beamercolorbox}[wd=\textwidth,ht=0.12cm,dp=0pt]{structure}\end{beamercolorbox}\par
+  \hbox{%
+    \begin{beamercolorbox}[wd=.70\paperwidth,ht=3.3ex,dp=1.25ex,leftskip=.78cm]{author in head/foot}%
+      \usebeamerfont{footline}\insertshortauthor
+      \ifx\insertshortinstitute\@empty\else\hspace{0.55em}{\color{DASEline}\textbar}\hspace{0.55em}\insertshortinstitute\fi
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.30\paperwidth,ht=3.3ex,dp=1.25ex,rightskip=.78cm plus 1fil]{date in head/foot}%
+      \usebeamerfont{footline}\hfill\insertsectionhead\hspace{0.8em}{\color{DASEline}\textbar}\hspace{0.8em}\insertframenumber\,/\,\inserttotalframenumber
+    \end{beamercolorbox}%
+  }
+}
+
+\defbeamertemplate*{title page}{DASE}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[DASEpurple] (current page.north west) rectangle ([xshift=.305\paperwidth]current page.south west);
+    \fill[DASEorange] ([xshift=.305\paperwidth]current page.north west) rectangle ([xshift=.315\paperwidth]current page.south west);
+    \fill[DASEblue!16] ([xshift=.73\paperwidth]current page.north east) -- (current page.north east) -- (current page.south east) -- ([xshift=.87\paperwidth]current page.south east) -- cycle;
+    \fill[DASEyellow] ([xshift=.91\paperwidth,yshift=-.22\paperheight]current page.north west) circle (0.45cm);
+    \fill[DASEgreen] ([xshift=.89\paperwidth,yshift=-.79\paperheight]current page.north west) circle (0.62cm);
+    \node[anchor=north west] at ([xshift=.82cm,yshift=-.82cm]current page.north west) {\dasebadge};
+    \node[anchor=south west,text=white,font=\sffamily\bfseries\fontsize{8}{10}\selectfont,rotate=90] at ([xshift=.95cm,yshift=.85cm]current page.south west) {THE UNIVERSITY OF HONG KONG};
+    \node[anchor=north east] at ([xshift=-.78cm,yshift=-.72cm]current page.north east) {\includegraphics[width=.25\paperwidth]{assets/HKU_Engineering.png}};
+    \node[anchor=west,text width=.59\paperwidth,align=left] at ([xshift=.375\paperwidth,yshift=.17\paperheight]current page.west) {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle};
+    \node[anchor=north west,text width=.57\paperwidth,align=left] at ([xshift=.375\paperwidth,yshift=-.51\paperheight]current page.north west) {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle};
+    \node[anchor=south west] at ([xshift=.375\paperwidth,yshift=.9cm]current page.south west) {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor};
+    \node[anchor=south east] at ([xshift=-.78cm,yshift=.9cm]current page.south east) {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate};
+  \end{tikzpicture}%
+  \strut
+}
+
+\defbeamertemplate*{section page}{DASE}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[DASEpurple] (current page.north west) rectangle (current page.south east);
+    \fill[DASEorange] ([xshift=.305\paperwidth]current page.north west) rectangle ([xshift=.315\paperwidth]current page.south west);
+    \fill[DASEgreen] ([xshift=.79\paperwidth,yshift=-.18\paperheight]current page.north west) circle (0.55cm);
+    \fill[DASEyellow] ([xshift=.91\paperwidth,yshift=-.80\paperheight]current page.north west) circle (0.75cm);
+    \node[anchor=north west] at ([xshift=.82cm,yshift=-.82cm]current page.north west) {\dasebadge};
+    \node[anchor=west,text=white,font=\sffamily\bfseries\fontsize{28}{32}\selectfont] at ([xshift=.375\paperwidth]current page.west) {\insertsectionnumber};
+    \node[anchor=west,text=white,text width=.55\paperwidth,align=left,font=\sffamily\bfseries\fontsize{24}{29}\selectfont] at ([xshift=.44\paperwidth,yshift=.02\paperheight]current page.west) {\insertsectionhead};
+    \node[anchor=south west,text=white!78,font=\sffamily\fontsize{8}{10}\selectfont] at ([xshift=.375\paperwidth,yshift=.9cm]current page.south west) {DASE / HKU SCHOOL OF ENGINEERING};
+  \end{tikzpicture}%
+  \strut
+}
+
+\setbeamertemplate{title}{\inserttitle}
+\setbeamertemplate{title page}[DASE]
+\setbeamertemplate{section page}[DASE]
+\setbeamertemplate{frametitle}[DASE]
+\setbeamertemplate{footline}[DASE]
+\makeatother
+\mode<all>
