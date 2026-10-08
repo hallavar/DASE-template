@@ -16,7 +16,8 @@
 \usepackage{fancyvrb}
 \usepackage{beamerthemeDASE}
 % Replace assets/lab-logo.png with a transparent PNG (RGBA) logo; sizing is automatic.
-% A transparent PDF/SVG also works. Avoid JPG: its white background will show.
+% A PDF without a filled background also works. Export SVG to PNG/PDF first.
+% Enable transparency when exporting; JPEG cannot store transparency.
 % For another filename/format: \renewcommand{\daselablogofile}{assets/my-lab.pdf}
 \usepackage[backend=biber,style=numeric,sorting=none,giveninits=true,
   maxbibnames=3,isbn=false,url=false]{biblatex}
@@ -373,7 +374,7 @@ def normalise(values):
     \textbf{File / location} & \textbf{Your change}\\
     \midrule
     \texttt{template.tex}: preamble & Set title, subtitle, author, institute and date.\\[2mm]
-    \texttt{assets/lab-logo.png} & Replace with a transparent PNG (RGBA); PDF/SVG with transparency also work. Avoid JPG.\\[2mm]
+    \texttt{assets/lab-logo.png} & Replace with a transparent PNG (RGBA), or use a PDF without a filled background.\\[2mm]
     \texttt{template.tex}: frames & Replace this guide with your chapters and content.\\[2mm]
     \texttt{images/} or \texttt{assets/} & Add your figures; update their filenames in the source.\\[2mm]
     \texttt{bib.bib} & Replace the sample sources and update citation keys.\\[2mm]
@@ -403,7 +404,7 @@ def normalise(values):
       \end{beamercolorbox}
     \column{.38\textwidth}
       \textbf{The easy logo replacement}\par\smallskip
-      \small Overwrite \texttt{assets/lab-logo.png} with a PNG that has an alpha channel (RGBA), so no white rectangle appears. PDF or SVG with transparency also work; avoid JPG logos.
+      \small Use a PNG with transparency enabled (RGBA) to avoid a white rectangle. PDF without a filled background also works. Export SVG to PNG/PDF first; JPEG cannot store transparency.
       \par\medskip
       \textbf{Sizing is automatic}\par\smallskip
       \small The reserved box has the DASE mark's width and height. Wide, tall and square images fit inside it without stretching.
