@@ -82,6 +82,29 @@
     ([xshift=.31\paperwidth,yshift=-.21\paperheight]current page.north west) --
     ([xshift=.35\paperwidth,yshift=-.49\paperheight]current page.north west) --
     ([xshift=.31\paperwidth,yshift=-.73\paperheight]current page.north west);}
+\newcommand{\daseorganiccover}{%
+  \fill[DASEmist] (current page.north west) rectangle (current page.south east);
+  \coordinate (daseA) at ([xshift=.39\paperwidth,yshift=-.08\paperheight]current page.north west);
+  \coordinate (daseB) at ([xshift=.30\paperwidth,yshift=-.47\paperheight]current page.north west);
+  \coordinate (daseC) at ([xshift=.42\paperwidth,yshift=-.90\paperheight]current page.north west);
+  \coordinate (daseAone) at ([xshift=.35\paperwidth,yshift=-.22\paperheight]current page.north west);
+  \coordinate (daseAtwo) at ([xshift=.28\paperwidth,yshift=-.36\paperheight]current page.north west);
+  \coordinate (daseBone) at ([xshift=.30\paperwidth,yshift=-.59\paperheight]current page.north west);
+  \coordinate (daseBtwo) at ([xshift=.36\paperwidth,yshift=-.72\paperheight]current page.north west);
+  \coordinate (daseCone) at ([xshift=.44\paperwidth,yshift=-.96\paperheight]current page.north west);
+  \coordinate (daseCtwo) at ([xshift=.46\paperwidth,yshift=-.99\paperheight]current page.north west);
+  \path[fill=DASEpurple]
+    (daseA) .. controls (daseAone) and (daseAtwo) .. (daseB)
+      .. controls (daseBone) and (daseBtwo) .. (daseC)
+      .. controls (daseCone) and (daseCtwo) .. (current page.south east)
+      -- (current page.north east) -- cycle;
+  \draw[DASEorange,line width=5pt,line cap=round,line join=round]
+    (daseA) .. controls (daseAone) and (daseAtwo) .. (daseB)
+      .. controls (daseBone) and (daseBtwo) .. (daseC)
+      .. controls (daseCone) and (daseCtwo) .. (current page.south east);
+  \draw[white,line width=3.5pt,line cap=round,line join=round]
+    ([xshift=.22cm,yshift=-.22cm]current page.north west) rectangle
+    ([xshift=-.22cm,yshift=.22cm]current page.south east);}
 
 \defbeamertemplate*{frametitle}{DASE}{%
   \nointerlineskip
@@ -110,14 +133,12 @@
 
 \defbeamertemplate*{title page}{DASE}{%
   \begin{tikzpicture}[remember picture,overlay]
-    \fill[DASEpurple] (current page.north west) rectangle (current page.south east);
-    \fill[DASEmist] (current page.north west) rectangle ([xshift=.31\paperwidth]current page.south west);
-    \dasedivider
+    \daseorganiccover
     \node[opacity=.10,anchor=center] at ([xshift=.76\paperwidth,yshift=-.54\paperheight]current page.north west) {\dasewatermarklight};
     \node[anchor=north west] at ([xshift=.48cm,yshift=-.48cm]current page.north west) {\dasebadge};
     \node[anchor=west,text width=.59\paperwidth,align=left] at ([xshift=.375\paperwidth,yshift=.17\paperheight]current page.west) {\usebeamerfont{title}\color{white}\inserttitle};
     \node[anchor=north west,text width=.57\paperwidth,align=left] at ([xshift=.375\paperwidth,yshift=-.51\paperheight]current page.north west) {\usebeamerfont{subtitle}\color{white!82}\insertsubtitle};
-    \node[anchor=south west] at ([xshift=.375\paperwidth,yshift=.9cm]current page.south west) {\usebeamerfont{author}\color{white}\insertauthor};
+    \node[anchor=south west] at ([xshift=.47\paperwidth,yshift=.9cm]current page.south west) {\usebeamerfont{author}\color{white}\insertauthor};
     \node[anchor=south east] at ([xshift=-.78cm,yshift=.9cm]current page.south east) {\usebeamerfont{date}\color{white!82}\insertdate};
   \end{tikzpicture}%
   \strut
